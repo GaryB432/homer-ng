@@ -25,6 +25,16 @@ module.exports = function (grunt) {
                 }
             }
         },
+        less: {
+            base: {
+                options: {
+                    paths: ["app/css"]
+                },
+                files: {
+                    "app/css/app.css": "app/css/app.less"
+                }
+            }
+        },
         clean: {
             dist: {
                 src: ['dist']
@@ -36,7 +46,7 @@ module.exports = function (grunt) {
                   {
                       expand: true,
                       cwd: 'app/',
-                      src: ['**', '!lib/**'],
+                      src: ['**', '!lib/**', '!**/*.less'],
                       dest: 'dist/'
                   }
                 ]
@@ -46,9 +56,10 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-typescript');
 
     grunt.registerTask('dist', ['clean:dist', 'copy:dist']);
-    grunt.registerTask('default', ['typescript:base']);
+    grunt.registerTask('default', ['typescript:base', 'less:base']);
 
 };

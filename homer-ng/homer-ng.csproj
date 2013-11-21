@@ -18,10 +18,18 @@
   <ItemGroup>
     <Content Include="app\css\animations.css" />
     <Content Include="app\index.html" />
+    <Content Include="app\js\app.js" />
+    <Content Include="app\js\controllers.js" />
+    <Content Include="app\js\directives.js" />
+    <Content Include="app\js\filters.js" />
+    <Content Include="app\js\homer.js" />
+    <Content Include="app\lib\geo\geo.js" />
+    <Content Include="Gruntfile.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\css\app.less" />
+    <Content Include="package.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -29,7 +37,12 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <TypeScriptCompile Include="app\js\app.ts" />
+    <TypeScriptCompile Include="app\js\controllers.ts" />
+    <TypeScriptCompile Include="app\js\filters.ts" />
+    <TypeScriptCompile Include="app\js\homer.ts" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

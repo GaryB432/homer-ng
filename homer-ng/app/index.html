@@ -1,0 +1,48 @@
+﻿<!doctype html>
+<html lang="en" ng-app="homerApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Homer 2.0</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <script src="lib/jquery/jquery-1.10.2.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angular-animate.js"></script>
+    <script src="lib/angular/angular-resource.js"></script>
+    <script src="lib/angular/angular-route.js"></script>
+    <script src="lib/geo/geo.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=geometry"></script>
+    <script src="js/homer.js"></script> 
+    <script src="js/app.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/services.js"></script>
+</head>
+<body>
+    <div class="view-container">
+        <div ng-view class="view-frame"></div>
+    </div>
+    <div id="box1" ng-controller="HomerHomeCtrl">
+        <h2>Current</h2>
+        <button id="setCurrent" ng-click="setCurrent()">Set Current</button>
+        <div class="addr" ng-class="currentCssClass">{{current.address}}</div>
+        <div class="coords">{{current.dms}}</div>
+        <div class="addr">{{distance | number:3}}</div>
+
+        <div class="mapholder static">
+            <div class="map">
+                <img id="map" ng-src="{{mapUrl}}" />
+            </div>
+        </div>
+
+        <h2>Home</h2>
+        <div class="addr">{{home.address}}</div>
+        <div class="coords">{{home.dms}}</div>
+        <button id="setHome" ng-click="setHome()">Set Home</button>
+
+    </div>
+</body>
+</html>

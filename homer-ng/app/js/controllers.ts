@@ -8,7 +8,6 @@ interface Scope extends ng.IScope {
     current: Homer.Loca;
     distance: number;
     setHome: () => void;
-    homerFun: () => void;
     setCurrent: () => void;
     mapUrl: string;
     currentCssClass: string;

@@ -35,7 +35,8 @@ var HomerHomeCtrl = (function () {
         $scope.setCurrent = function () {
             $scope.currentCssClass = '';
             $.when(_this.app.getCurrentLocation()).then(onCurrentLocationReceived).fail(function (e) {
-                alert(e);
+                $scope.currentCssClass = 'err';
+                $scope.current = { coordinates: null, address: e, dms: null };
             }).always(function () {
                 $scope.$apply();
             });

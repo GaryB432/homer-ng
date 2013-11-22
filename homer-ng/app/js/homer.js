@@ -1,9 +1,3 @@
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
 var GoogleGeocoding;
 (function (GoogleGeocoding) {
     var GeoCoder = (function () {
@@ -65,19 +59,6 @@ var GoogleMapping;
 })(GoogleMapping || (GoogleMapping = {}));
 var Homer;
 (function (Homer) {
-    var HomerStaticMap = (function (_super) {
-        __extends(HomerStaticMap, _super);
-        function HomerStaticMap(mapDiv, home, current) {
-            _super.call(this, mapDiv);
-            this.home = home;
-            this.current = current;
-        }
-        HomerStaticMap.prototype.draw = function () {
-            $(this.mapDiv).empty().css({ height: 345, width: 290 }).append(GoogleMapping.StaticMap.googleMapImage(this.home, this.current));
-        };
-        return HomerStaticMap;
-    })(GoogleMapping.StaticMap);
-    Homer.HomerStaticMap = HomerStaticMap;
     var App = (function () {
         function App() {
             this.zeroCoordinates = {

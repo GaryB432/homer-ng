@@ -46,7 +46,8 @@ class HomerHomeCtrl {
             $.when(this.app.getCurrentLocation())
                 .then(onCurrentLocationReceived)
                 .fail((e) => {
-                    alert(e);
+                    $scope.currentCssClass = 'err';
+                    $scope.current = { coordinates: null, address: e, dms: null };
                 })
                 .always(() => {
                     $scope.$apply();

@@ -79,14 +79,6 @@ module Homer {
         location: Coordinates;
         metersToHome: number;
     }
-    export class HomerStaticMap extends GoogleMapping.StaticMap {
-        constructor(mapDiv: Element, public home: Coordinates, public current: Coordinates) {
-            super(mapDiv);
-        }
-        draw(): void {
-            $(this.mapDiv).empty().css({ height: 345, width: 290 }).append(GoogleMapping.StaticMap.googleMapImage(this.home, this.current));
-        }
-    }
     export class App {
         homeCoordinates: Coordinates;
         zeroCoordinates: Coordinates = {

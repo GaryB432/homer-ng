@@ -41,7 +41,6 @@ h4 {
     -webkit-transform: scale(1);
   }
 }
-/* This is the element that we apply the animation to. */
 .homerfun {
   -webkit-animation-name: homerfun;
   -webkit-animation-duration: 1s;

@@ -8,9 +8,8 @@ var homerDirectives = angular.module('homerDirectives', []);
 homerDirectives.directive('homerlocadirective', function factory($parse) {
     var directiveDefinitionObject = {
         templateUrl: 'partials/address-detail.html',
-        restrict: 'E',
         scope: {
-            address: '='
+            address: '=address'
         }
     };
     return directiveDefinitionObject;

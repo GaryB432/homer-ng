@@ -14,9 +14,8 @@ var homerDirectives = angular.module('homerDirectives', []);
 homerDirectives.directive('homerlocadirective', function factory($parse: ng.IParseService) {
     var directiveDefinitionObject: ng.IDirective = {
         templateUrl: 'partials/address-detail.html',
-        restrict: 'E',
         scope: {
-            address: '='
+            address: '=address'
         },
     };
     return directiveDefinitionObject;

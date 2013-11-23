@@ -25,6 +25,7 @@
     <Content Include="app\js\filters.js" />
     <Content Include="app\js\homer.js" />
     <Content Include="app\lib\geo\geo.js" />
+    <Content Include="app\partials\address-detail.html" />
     <Content Include="Gruntfile.js" />
     <Content Include="web.config" />
   </ItemGroup>
@@ -41,6 +42,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app\js\app.ts" />
     <TypeScriptCompile Include="app\js\controllers.ts" />
+    <TypeScriptCompile Include="app\js\directives.ts" />
     <TypeScriptCompile Include="app\js\filters.ts" />
     <TypeScriptCompile Include="app\js\homer.ts" />
   </ItemGroup>

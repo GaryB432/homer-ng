@@ -18,6 +18,7 @@
     <script src="js/app.js"></script>
     <script src="js/animations.js"></script>
     <script src="js/controllers.js"></script>
+    <script src="js/directives.js"></script>
     <script src="js/filters.js"></script>
     <script src="js/services.js"></script>
 </head>
@@ -28,6 +29,8 @@
     <div id="box1" ng-controller="HomerHomeCtrl">
         <h2>Current</h2>
         <button id="setCurrent" ng-click="setCurrent()">Set Current</button>
+        <span class="homerlocadirective: {{current}};"></span>
+        <div data-homerlocadirective="current"></div>
         <div class="addr" ng-class="currentCssClass">{{current.address}}</div>
         <div class="coords">{{current.dms}}</div>
         <div class="addr">{{distance | number:3}}</div>

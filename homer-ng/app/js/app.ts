@@ -27,4 +27,14 @@ phonecatApp.config(['$routeProvider',
             });
     }]);
 
-var homerApp = angular.module('homerApp', ['homerControllers']);
+var homerApp = angular.module('homerApp', ['ng', 'homerControllers', 'homerDirectives']);
+
+//module todos {
+//    'use strict';
+
+//    var todomvc = angular.module('todomvc', [])
+//        .controller('todoCtrl', TodoCtrl)
+//        .directive('todoBlur', todoBlur)
+//        .directive('todoFocus', todoFocus)
+//        .service('todoStorage', TodoStorage);
+//}

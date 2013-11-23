@@ -22,5 +22,5 @@ phonecatApp.config([
     }
 ]);
 
-var homerApp = angular.module('homerApp', ['homerControllers']);
+var homerApp = angular.module('homerApp', ['ng', 'homerControllers', 'homerDirectives']);
 //# sourceMappingURL=app.js.map

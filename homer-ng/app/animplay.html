@@ -21,7 +21,16 @@
               }
           });
 
-        angular.module('xmpl.directive', []);
+        angular.module('xmpl.directive', []).
+            directive('xmplHelloDirective', function factory($parse) {
+                var directiveDefinitionObject = {
+                    template: '<div>{{plea}}!</div>',
+                    scope: {
+                        plea: '='
+                    }
+                };
+                return directiveDefinitionObject;
+            });
 
         angular.module('xmpl.filter', []);
 
@@ -38,12 +47,14 @@
         // A Controller for your app
         var XmplController = function ($scope, greeter, user) {
             $scope.greeting = greeter.greet(user.name);
+            $scope.plea = 'make this work';
         }
     </script>
 </head>
 <body>
     <div ng-controller="XmplController">
         {{ greeting }}!
+        <div data-xmpl-hello-directive data-plea="plea"></div>
     </div>
 </body>
 </html>

@@ -6,12 +6,12 @@
 interface Scope extends ng.IScope, Homer.Loca { }
 
 interface ILinkAttributes extends ng.IAttributes {
-    homerlocadirective: string;
+    homerLocaDirective: string;
 };
 
 var homerDirectives = angular.module('homerDirectives', []);
 
-homerDirectives.directive('homerlocadirective', function factory($parse: ng.IParseService) {
+homerDirectives.directive('homerLocaDirective', function factory($parse: ng.IParseService) {
     var directiveDefinitionObject: ng.IDirective = {
         templateUrl: 'partials/address-detail.html',
         scope: {

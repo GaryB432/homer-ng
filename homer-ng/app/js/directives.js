@@ -5,7 +5,7 @@
 
 var homerDirectives = angular.module('homerDirectives', []);
 
-homerDirectives.directive('homerlocadirective', function factory($parse) {
+homerDirectives.directive('homerLocaDirective', function factory($parse) {
     var directiveDefinitionObject = {
         templateUrl: 'partials/address-detail.html',
         scope: {

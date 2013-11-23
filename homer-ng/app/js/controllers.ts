@@ -22,7 +22,7 @@ class HomerHomeCtrl {
 
         $scope.home = this.app.home;
 
-        $scope.$watch('current', (current: Homer.Loca, oldVal:Homer.Loca) => console.log(current === $scope.current, oldVal));
+        //$scope.$watch('current', (current: Homer.Loca, oldVal:Homer.Loca) => console.log(current === $scope.current, oldVal));
 
         $scope.setHome = () => {
             $.when(this.app.getCurrentLocation()).then((loc: Homer.Loca) => {
@@ -37,7 +37,6 @@ class HomerHomeCtrl {
                 $scope.currentCssClass = 'homerfun';
                 $scope.mapUrl = GoogleMapping.StaticMap.googleMapUrl(this.app.home.coordinates, this.app.current.coordinates);
                 $scope.distance = this.app.metersToHome;
-                console.log($scope.distance);
             }
         }
 

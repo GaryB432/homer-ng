@@ -5,31 +5,22 @@
 
 interface Scope extends ng.IScope, Homer.Loca { }
 
+interface ILinkAttributes extends ng.IAttributes {
+    homerlocadirective: string;
+};
+
 var homerDirectives = angular.module('homerDirectives', []);
 
-
-homerDirectives.directive('homerlocadirective', function factory() {
-    var directiveDefinitionObject = {
-        link: function postLink($scope: Scope, iElement: Element, iAttrs: ng.IAttributes) {
-            console.log('OMG');
+homerDirectives.directive('homerlocadirective', function factory($parse: ng.IParseService) {
+    var directiveDefinitionObject: ng.IDirective = {
+        templateUrl: 'partials/address-detail.html',
+        link: function postLink($scope: Scope, iElement: JQuery, iAttrs: ILinkAttributes) {
+            $scope.$watch(iAttrs.homerlocadirective, (addr) => {
+                console.log(iAttrs.homerlocadirective, addr);
+                $scope.address = addr;
+            });
+            iElement.on('click', () => alert('click'));
         }
     };
     return directiveDefinitionObject;
 });
-
-//homerControllers.directive('homerlocadirective', ['$scope', Directives.HomerLocaDirective]);
-
-//module todos {
-//    'use strict';
-
-//    /**
-//     * Directive that executes an expression when the element it is applied to loses focus.
-//     */
-//    export function todoBlur(): ng.IDirective {
-//        return {
-//            link: ($scope: ng.IScope, element: JQuery, attributes: any) => {
-//                element.bind('blur', () => { $scope.$apply(attributes.todoBlur); });
-//            }
-//        };
-//    }
-//}

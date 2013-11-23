@@ -1,3 +1,4 @@
+/// <reference path="../lib/typings/google/angular-1.0.d.ts" />
 'use strict';
 var phonecatApp = angular.module('phonecatApp', [
     'ngRoute',

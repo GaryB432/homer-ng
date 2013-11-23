@@ -1,3 +1,5 @@
+/// <reference path="../lib/typings/google/angular-1.0.d.ts" />
+/// <reference path="homer.ts" />
 'use strict';
 var homerControllers = angular.module('homerControllers', []);
 
@@ -9,10 +11,7 @@ var HomerHomeCtrl = (function () {
 
         $scope.home = this.app.home;
 
-        $scope.$watch('current', function (current, oldVal) {
-            return console.log(current === $scope.current, oldVal);
-        });
-
+        //$scope.$watch('current', (current: Homer.Loca, oldVal:Homer.Loca) => console.log(current === $scope.current, oldVal));
         $scope.setHome = function () {
             $.when(_this.app.getCurrentLocation()).then(function (loc) {
                 $scope.home = $scope.current = _this.app.setHomeLocation(loc);
@@ -28,7 +27,6 @@ var HomerHomeCtrl = (function () {
                 $scope.currentCssClass = 'homerfun';
                 $scope.mapUrl = GoogleMapping.StaticMap.googleMapUrl(_this.app.home.coordinates, _this.app.current.coordinates);
                 $scope.distance = _this.app.metersToHome;
-                console.log($scope.distance);
             }
         };
 

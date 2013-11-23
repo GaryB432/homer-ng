@@ -1,22 +1,25 @@
 /// <reference path="../lib/typings/google/angular-1.0.d.ts" />
 /// <reference path="homer.ts" />
 
-'use strict';
+module HomerWeb {
 
-interface Scope extends ng.IScope, Homer.Loca { }
+    'use strict';
 
-interface ILinkAttributes extends ng.IAttributes {
-    homerLocaDirective: string;
-};
+    interface Scope extends ng.IScope, Homer.Loca { }
 
-var homerDirectives = angular.module('homerDirectives', []);
-
-homerDirectives.directive('homerLocaDirective', function factory($parse: ng.IParseService) {
-    var directiveDefinitionObject: ng.IDirective = {
-        templateUrl: 'partials/address-detail.html',
-        scope: {
-            address: '=address'
-        },
+    interface ILinkAttributes extends ng.IAttributes {
+        homerLocaDirective: string;
     };
-    return directiveDefinitionObject;
-});
+
+    var homerDirectives = angular.module('homerDirectives', []);
+
+    homerDirectives.directive('homerLocaDirective', function factory($parse: ng.IParseService) {
+        var directiveDefinitionObject: ng.IDirective = {
+            templateUrl: 'partials/address-detail.html',
+            scope: {
+                address: '=address'
+            },
+        };
+        return directiveDefinitionObject;
+    });
+}

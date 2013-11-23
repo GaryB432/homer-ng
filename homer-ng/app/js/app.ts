@@ -1,5 +1,8 @@
 /// <reference path="../lib/typings/google/angular-1.0.d.ts" />
 
-'use strict';
+module HomerWeb {
 
-var homerApp = angular.module('homerApp', ['homerControllers', 'homerDirectives']);
+    'use strict';
+
+    var homerApp = angular.module('homerApp', ['homerControllers', 'homerDirectives']);
+}

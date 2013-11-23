@@ -14,13 +14,10 @@ var homerDirectives = angular.module('homerDirectives', []);
 homerDirectives.directive('homerlocadirective', function factory($parse: ng.IParseService) {
     var directiveDefinitionObject: ng.IDirective = {
         templateUrl: 'partials/address-detail.html',
-        link: function postLink($scope: Scope, iElement: JQuery, iAttrs: ILinkAttributes) {
-            $scope.$watch(iAttrs.homerlocadirective, (addr) => {
-                console.log(iAttrs.homerlocadirective, addr);
-                $scope.address = addr;
-            });
-            iElement.on('click', () => alert('click'));
-        }
+        restrict: 'E',
+        scope: {
+            address: '='
+        },
     };
     return directiveDefinitionObject;
 });

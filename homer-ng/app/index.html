@@ -29,7 +29,7 @@
     <div id="box1" ng-controller="HomerHomeCtrl">
         <h2>Current</h2>
         <button id="setCurrent" ng-click="setCurrent()">Set Current</button>
-        <div data-homerlocadirective="current"></div>
+        <homerlocadirective data-address="current"></homerlocadirective>
         <div class="addr">{{distance | number:3}}</div>
 
         <div class="mapholder static">
@@ -39,7 +39,7 @@
         </div>
 
         <h2>Home</h2>
-        <div data-homerlocadirective="home"></div>
+        <homerlocadirective data-address="home"></homerlocadirective>
         <button id="setHome" ng-click="setHome()">Set Home</button>
 
     </div>

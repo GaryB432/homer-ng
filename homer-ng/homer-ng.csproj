@@ -16,6 +16,7 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="app\animplay.html" />
     <Content Include="app\css\animations.css" />
     <Content Include="app\css\app.css" />
     <Content Include="app\index.html" />

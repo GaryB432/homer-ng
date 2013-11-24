@@ -79,64 +79,6 @@ module Homer {
         location: Coordinates;
         metersToHome: number;
     }
-    export class App {
-        homeCoordinates: Coordinates;
-        zeroCoordinates: Coordinates = {
-            speed: null,
-            heading: null,
-            altitudeAccuracy: null,
-            accuracy: 0,
-            altitude: null,
-            longitude: -90.5515486,
-            latitude: 38.5754833
-        };
-        static distanceText(meters: number): string {
-            return (meters < 200) ? (meters * 3.28084).toPrecision(5).concat(' feet') : (meters * 0.000621371192237).toPrecision(4).concat(' miles');
-        }
-        static homePositionKey: string = 'HomeCoordinates';
-        constructor() {
-            this.homeCoordinates = this._getHomeCoordinates();
-        }
-        private _getHomeCoordinates(): Coordinates {
-            return JSON.parse(localStorage.getItem(App.homePositionKey));
-        }
-        setHomeCoordinates(coordinates: Coordinates): void {
-            return localStorage.setItem(App.homePositionKey, JSON.stringify(coordinates));
-        }
-        getCurrent(): JQueryDeferred<Coordinates> {
-            var dfd = $.Deferred();
-            navigator.geolocation.getCurrentPosition((position) => dfd.resolve(position.coords), (e) => dfd.reject(e), null);
-            return dfd;
-        }
-        setCurrentAsHome(): JQueryDeferred<Coordinates> {
-            var dfd = this.getCurrent();
-            dfd.done((c) => this.setHomeCoordinates(c));
-            return dfd;
-        }
-        updateCurrentLocation(): JQueryDeferred<CurrentLocationResponse> {
-            var dfd = $.Deferred(), self = this;
-            $.when(this.getCurrent()).then(function (currentCoords: Coordinates) {
-                var r: CurrentLocationResponse = {
-                    location: currentCoords,
-                    metersToHome: self.computeDistanceTo(currentCoords)
-                };
-                return dfd.resolve(r);
-            });
-            return dfd;
-        }
-        computeDistanceTo(to: Coordinates, radius?: number) {
-            return GoogleGeocoding.GeoCoder.computeDistanceBetween(this.homeCoordinates, to, radius);
-        }
-        getAddress(coords: Coordinates, done: (s: string) => void, fail: (s: google.maps.GeocoderStatus) => void): void {
-            if (GoogleGeocoding.GeoCoder.computeDistanceBetween(coords, this.zeroCoordinates) < 10) {
-                window.setTimeout(() => fail(google.maps.GeocoderStatus.INVALID_REQUEST), 2000); // you should know this address
-            }
-            else {
-                GoogleGeocoding.GeoCoder.getAddress(coords, done, fail);
-            }
-        }
-    }
-
     export class App2 {
         home: Loca;
         current: Loca;

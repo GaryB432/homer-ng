@@ -1,4 +1,5 @@
 /// <reference path="../lib/typings/google/angular-1.0.d.ts" />
+/// <reference path="services.ts" />
 /// <reference path="homer.ts" />
 
 module HomerWeb {
@@ -12,17 +13,18 @@ module HomerWeb {
         setHome: () => void;
         setCurrent: () => void;
         mapUrl: string;
-        currentCssClass: string;
     }
 
-    var homerControllers = angular.module('homerControllers', []);
+    var homerControllers = angular.module('homerControllers', ['homerServices']);
 
     class HomerHomeCtrl {
         app: Homer.App2 = new Homer.App2();
-        constructor($scope: Scope) {
+        constructor($scope: Scope, homerService: HomerWeb.HomerService ) {
             this.app.start();
 
             $scope.home = this.app.home;
+
+            $scope.current = homerService.getUnsetLoca();
 
             //$scope.$watch('current', (current: Homer.Loca, oldVal:Homer.Loca) => console.log(current === $scope.current, oldVal));
 
@@ -36,18 +38,15 @@ module HomerWeb {
             var onCurrentLocationReceived = (loc: Homer.Loca) => {
                 $scope.current = loc;
                 if (!!this.app.home) {
-                    $scope.currentCssClass = 'homerfun';
-                    $scope.mapUrl = GoogleMapping.StaticMap.googleMapUrl(this.app.home.coordinates, this.app.current.coordinates);
+                    $scope.mapUrl = homerService.getStaticMap(this.app.home.coordinates, this.app.current.coordinates);
                     $scope.distance = this.app.metersToHome;
                 }
             }
 
         $scope.setCurrent = () => {
-                $scope.currentCssClass = '';
                 $.when(this.app.getCurrentLocation())
                     .then(onCurrentLocationReceived)
                     .fail((e) => {
-                        $scope.currentCssClass = 'err';
                         $scope.current = { coordinates: null, address: e, dms: null };
                     })
                     .always(() => {
@@ -57,5 +56,5 @@ module HomerWeb {
         }
     }
 
-    homerControllers.controller('HomerHomeCtrl', ['$scope', HomerHomeCtrl]);
+    homerControllers.controller('HomerHomeCtrl', ['$scope', 'homerService', HomerHomeCtrl]);
 }

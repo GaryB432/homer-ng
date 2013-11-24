@@ -145,6 +145,10 @@
             };
         });
 
+        angular.module('homerGoogleService', [], function () {
+        });
+
+        myApp.service('unicornLauncher', ["apiToken", UnicornLauncher]);
 
         angular.module('xmpl.service', []).
           value('greeter', {

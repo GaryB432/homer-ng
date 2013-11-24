@@ -6,12 +6,73 @@
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular/angular-animate.min.js"></script>
     <style type="text/css">
+
+
+        .base-class {
+            -webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+            transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+            padding: 10px;
+            border: 1px solid black;
+            background: white;
+            opacity: 1;
+        }
+
+            .base-class.gary1 {
+                opacity:0;
+            }
+
+
+        /*
+
         .animate-show-hide {
             padding: 10px;
             border: 1px solid black;
             background: white;
         }
 
+        .gary1 {
+            background: blue;
+        }
+
+        .gary1-add {
+            -webkit-transition: all linear 0.5s;
+            -moz-transition: all linear 0.5s;
+            -o-transition: all linear 0.5s;
+            transition: all linear 2.5s;
+            display: block !important;
+        }
+
+        .gary1-add-active {
+
+        }
+
+        .animate-show-hide.gary1 {
+            background-color: orange;
+            opacity:1;
+        }
+
+            .animate-show-hide.gary1 .ng-binding {
+                background-color: orange;
+                opacity: 1;
+            }
+
+        .animate-show-hide.gary1-add {
+            transition:all linear 2s;
+        }
+            .animate-show-hide.gary1-remove {
+                transition: all linear 2s;
+            }
+
+            .animate-show-hide.gary1-remove-active {
+                opacity: 0;
+            }
+            .animate-show-hide.gary1-add-active {
+                opacity:0;
+            }*/
+
+
+     
+        /*
         .animate-show-hide.ng-hide-add, .animate-show-hide.ng-hide-remove {
             -webkit-transition: all linear 0.5s;
             -moz-transition: all linear 0.5s;
@@ -28,7 +89,7 @@
         .animate-show-hide.ng-hide-add,
         .animate-show-hide.ng-hide-remove.ng-hide-remove-active {
             opacity: 1;
-        }
+        }*/
     </style>
     <script>
 
@@ -111,53 +172,16 @@
                     },
                     link: function linkingFn(scope, elm, attrs, ctrl) {
 
+                        $animate.addClass(elm, 'base-class');
+
                         scope.$watch('plea', function () {
                             console.log('wow');
-                            $animate.addClass(elm, 'animate-show-hide ng-hide', function () { console.log('done'); });
-                            //elm.css({ color: 'red' });
+                            $animate.addClass(elm, 'gary1', function () {
+                                $animate.removeClass(elm, 'gary1', function () {
+                                    console.log('done');
+                                });
+                            });
                         });
-
-
-                        //scope.showInput = false;
-
-                        //var button = element.find('button');
-                        //var input = element.find('input');
-
-                        //button.bind("click", function () {
-                        //    scope.showInput = true;
-                        //    scope.$apply();
-
-                        //    input[0].focus();
-                        //    input.css({ "width": "300px", "transition": "1s" });
-                        //});
-
-                        //input.bind('blur', function () {
-                        //    scope.showInput = false;
-                        //    $timeout(function () { scope.$apply(); }, 1000);
-
-                        //    input.css({ 'width': '0px', 'transition': '1s' });
-                        //});
-
-                        console.log(scope);
-
-                        //var q = scope.$apply(function () { $parse(attrs.plea).assign(scope, {}) });
-
-                        //console.log(q);
-
-                        //scope.$watch(attrs.plea, function (a, b) { console.log(a, b); });
-
-
-                        //$animate.addClass(elm, 'ng-hide', function () { elm.addClass('ng-show'); });
-
-                        //elm.bind('click', function () {
-                        //    scope.stuff = false;
-                        //    scope.$apply();
-                        //    scope.stuff = true;
-                        //    scope.$apply();
-                        //});
-
-                        //scope.stuff = true;
-
                     }
                 };
                 return directiveDefinitionObject;

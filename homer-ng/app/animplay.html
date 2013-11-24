@@ -2,6 +2,7 @@
 <html ng-app="xmpl">
 <head>
     <title>fun</title>
+    <script src="lib/jquery/jquery-1.10.2.min.js"></script>
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular/angular-animate.min.js"></script>
     <style type="text/css">
@@ -15,7 +16,7 @@
             -webkit-transition: all linear 0.5s;
             -moz-transition: all linear 0.5s;
             -o-transition: all linear 0.5s;
-            transition: all linear 2.5s;
+            transition: all linear 12.5s;
             display: block !important;
         }
 
@@ -30,6 +31,60 @@
         }
     </style>
     <script>
+
+        angular.module('xmpl.animations', ['ngAnimate']).
+        animation('.phone', function () {
+
+            var animateUp = function (element, className, done) {
+                //if (className != 'active') {
+                //    return;
+                //}
+                element.css({
+                    position: 'absolute',
+                    top: 500,
+                    left: 0,
+                    display: 'block'
+                });
+
+                jQuery(element).animate({
+                    top: 0
+                }, done);
+
+                return function (cancel) {
+                    if (cancel) {
+                        element.stop();
+                    }
+                };
+            }
+
+            var animateDown = function (element, className, done) {
+                if (className != 'active') {
+                    return;
+                }
+                element.css({
+                    position: 'absolute',
+                    left: 0,
+                    top: 0
+                });
+
+                jQuery(element).animate({
+                    top: -500
+                }, done);
+
+                return function (cancel) {
+                    if (cancel) {
+                        element.stop();
+                    }
+                };
+            }
+
+            return {
+                addClass: animateUp,
+                removeClass: animateDown
+            };
+        });
+
+
         angular.module('xmpl.service', []).
           value('greeter', {
               salutation: 'Hello',
@@ -49,23 +104,18 @@
         angular.module('xmpl.directive', []).
             directive('xmplHelloDirective', function factory($parse, $animate) {
                 var directiveDefinitionObject = {
-                    template: '<div class="animate-show-hide" ng-show="stuff">{{plea.help}}!</div>',
+                    template: '<div>{{plea.help}}!</div>',
                     scope: {
-                        plea: '='
+                        plea: '=',
+
                     },
                     link: function linkingFn(scope, elm, attrs, ctrl) {
-                        //// get the attribute value
-                        //console.log(attrs.plea);
 
-
-
-                        //// change the attribute
-                        //attrs.$set('plea', 'plea2');
-
-                        //// observe changes to interpolated attribute
-                        //attrs.$observe('plea', function (value) {
-                        //    console.log('plea has changed value to ' + value);
-                        //});
+                        scope.$watch('plea', function () {
+                            console.log('wow');
+                            $animate.addClass(elm, 'animate-show-hide ng-hide', function () { console.log('done'); });
+                            //elm.css({ color: 'red' });
+                        });
 
 
                         //scope.showInput = false;
@@ -99,14 +149,14 @@
 
                         //$animate.addClass(elm, 'ng-hide', function () { elm.addClass('ng-show'); });
 
-                        elm.bind('click', function () {
-                            scope.stuff = false;
-                            scope.$apply();
-                            scope.stuff = true;
-                            scope.$apply();
-                        });
+                        //elm.bind('click', function () {
+                        //    scope.stuff = false;
+                        //    scope.$apply();
+                        //    scope.stuff = true;
+                        //    scope.$apply();
+                        //});
 
-                        scope.stuff = true;
+                        //scope.stuff = true;
 
                     }
                 };
@@ -132,7 +182,8 @@
             $scope.plea2 = { help: 'animate when changed' };
             $scope.changeItUp = function () {
                 $scope.plea1 = { help: 'make this fun' };
-            }
+
+            };
         }
     </script>
 </head>

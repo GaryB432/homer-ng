@@ -4,6 +4,31 @@
     <title>fun</title>
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular/angular-animate.min.js"></script>
+    <style type="text/css">
+        .animate-show-hide {
+            padding: 10px;
+            border: 1px solid black;
+            background: white;
+        }
+
+        .animate-show-hide.ng-hide-add, .animate-show-hide.ng-hide-remove {
+            -webkit-transition: all linear 0.5s;
+            -moz-transition: all linear 0.5s;
+            -o-transition: all linear 0.5s;
+            transition: all linear 2.5s;
+            display: block !important;
+        }
+
+        .animate-show-hide.ng-hide-add.ng-hide-add-active,
+        .animate-show-hide.ng-hide-remove {
+            opacity: 0;
+        }
+
+        .animate-show-hide.ng-hide-add,
+        .animate-show-hide.ng-hide-remove.ng-hide-remove-active {
+            opacity: 1;
+        }
+    </style>
     <script>
         angular.module('xmpl.service', []).
           value('greeter', {
@@ -22,11 +47,67 @@
           });
 
         angular.module('xmpl.directive', []).
-            directive('xmplHelloDirective', function factory($parse) {
+            directive('xmplHelloDirective', function factory($parse, $animate) {
                 var directiveDefinitionObject = {
-                    template: '<div>{{plea.help}}!</div>',
+                    template: '<div class="animate-show-hide" ng-show="stuff">{{plea.help}}!</div>',
                     scope: {
                         plea: '='
+                    },
+                    link: function linkingFn(scope, elm, attrs, ctrl) {
+                        //// get the attribute value
+                        //console.log(attrs.plea);
+
+
+
+                        //// change the attribute
+                        //attrs.$set('plea', 'plea2');
+
+                        //// observe changes to interpolated attribute
+                        //attrs.$observe('plea', function (value) {
+                        //    console.log('plea has changed value to ' + value);
+                        //});
+
+
+                        //scope.showInput = false;
+
+                        //var button = element.find('button');
+                        //var input = element.find('input');
+
+                        //button.bind("click", function () {
+                        //    scope.showInput = true;
+                        //    scope.$apply();
+
+                        //    input[0].focus();
+                        //    input.css({ "width": "300px", "transition": "1s" });
+                        //});
+
+                        //input.bind('blur', function () {
+                        //    scope.showInput = false;
+                        //    $timeout(function () { scope.$apply(); }, 1000);
+
+                        //    input.css({ 'width': '0px', 'transition': '1s' });
+                        //});
+
+                        console.log(scope);
+
+                        //var q = scope.$apply(function () { $parse(attrs.plea).assign(scope, {}) });
+
+                        //console.log(q);
+
+                        //scope.$watch(attrs.plea, function (a, b) { console.log(a, b); });
+
+
+                        //$animate.addClass(elm, 'ng-hide', function () { elm.addClass('ng-show'); });
+
+                        elm.bind('click', function () {
+                            scope.stuff = false;
+                            scope.$apply();
+                            scope.stuff = true;
+                            scope.$apply();
+                        });
+
+                        scope.stuff = true;
+
                     }
                 };
                 return directiveDefinitionObject;
@@ -34,7 +115,7 @@
 
         angular.module('xmpl.filter', []);
 
-        angular.module('xmpl', ['xmpl.service', 'xmpl.directive', 'xmpl.filter']).
+        angular.module('xmpl', ['ngAnimate', 'xmpl.service', 'xmpl.directive', 'xmpl.filter']).
           run(function (greeter, user) {
               // This is effectively part of the main method initialization code
               greeter.localize({
@@ -62,7 +143,7 @@
         <section id="elsewhere">
             <div data-xmpl-hello-directive data-plea="plea2"></div>
         </section>
-        <button ng-click="changeItUp();" >Change</button>
+        <button ng-click="changeItUp();">Change</button>
     </div>
 </body>
 </html>

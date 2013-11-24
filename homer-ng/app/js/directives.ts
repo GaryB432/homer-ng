@@ -16,7 +16,7 @@ module HomerWeb {
 
     var homerDirectives = angular.module('homerDirectives', []);
 
-    homerDirectives.directive('homerLocaDirective', function factory($parse: ng.IParseService) {
+    homerDirectives.directive('homerLocaDirective', function factory($parse: ng.IParseService, $animate) {
         var directiveDefinitionObject: ng.IDirective = {
             templateUrl: 'partials/address-detail.html',
             scope: {
@@ -26,7 +26,8 @@ module HomerWeb {
                 $scope.onChange = (loca) => {
                     if (!!loca) {
                         console.log('changed', loca, $element);
-                        $element.removeClass('homerfun').addClass('homerfun');
+                        $animate.removeClass($element, 'homerfun', () => $animate.addClass($element, 'homerfun'));
+                        //$element.removeClass('homerfun').addClass('homerfun');
                     }
                 };
             },

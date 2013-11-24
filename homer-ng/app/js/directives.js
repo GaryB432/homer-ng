@@ -9,7 +9,7 @@ var HomerWeb;
 
     var homerDirectives = angular.module('homerDirectives', []);
 
-    homerDirectives.directive('homerLocaDirective', function factory($parse) {
+    homerDirectives.directive('homerLocaDirective', function factory($parse, $animate) {
         var directiveDefinitionObject = {
             templateUrl: 'partials/address-detail.html',
             scope: {
@@ -19,7 +19,10 @@ var HomerWeb;
                 $scope.onChange = function (loca) {
                     if (!!loca) {
                         console.log('changed', loca, $element);
-                        $element.removeClass('homerfun').addClass('homerfun');
+                        $animate.removeClass($element, 'homerfun', function () {
+                            return $animate.addClass($element, 'homerfun');
+                        });
+                        //$element.removeClass('homerfun').addClass('homerfun');
                     }
                 };
             },

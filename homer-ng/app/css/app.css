@@ -2,43 +2,47 @@ body {
   font-size: 22px;
   font-family: Arial, Helvetica, sans-serif;
 }
+div,
+h1,
+h2 {
+  padding: 0;
+  margin: 0;
+}
+.ip {
+  width: 320px;
+  padding: 20px 0px;
+  background: orange;
+  overflow: hidden;
+}
+.ip .a1,
+.ip .a2,
+.ip .a3 {
+  padding: 0 20px;
+}
+.ip .a2 {
+  padding: 2px 15px;
+}
+.ip h2 {
+  font-size: 1.5em;
+  margin: .5em 0;
+}
 .addr {
   font-size: 1.2em;
-  margin: 20px 0;
-  width: 90%;
-  color: black;
 }
 .addr.err {
   background: rgba(255, 0, 0, 0.7);
 }
-#box1 {
-  padding: 5px 10px;
-}
-h1 {
-  font-size: 2em;
-  margin: .67em 0;
-}
-h2 {
-  font-size: 1.5em;
-  margin: .5em 0;
-}
-h3 {
-  font-size: 1.17em;
-  margin: 1em 0;
-}
-h4 {
-  font-size: 1em;
-  margin: 1.33em 0;
-}
-.mapholder {
-  margin: 0 5px;
+.coords {
+  font-size: .8em;
 }
 @-webkit-keyframes homerfun {
   from {
-    -webkit-transform: scale(2);
+    -webkit-transform: scale(0.3);
+    transform: scale(0.3);
   }
   to {
     -webkit-transform: scale(1);
+    transform: scale(1);
   }
 }
 .homerfun {

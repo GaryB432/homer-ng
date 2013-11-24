@@ -26,11 +26,27 @@
     <div class="view-container">
         <div ng-view class="view-frame"></div>
     </div>
-    <div id="box1" ng-controller="HomerHomeCtrl">
-        <h2>Current</h2>
-        <button id="setCurrent" ng-click="setCurrent()">Set Current</button>
-        <div data-homer-loca-directive data-address="current"></div>
-        <div class="addr">{{distance | number:3}}</div>
+    <div ng-controller="HomerHomeCtrl">
+        <div class="ip">
+            <div class="a1">
+                    <h2>Current</h2>
+                    <div data-homer-loca-directive data-address="current"></div>
+                    <div class="addr">{{distance | number:3}}</div>
+                    <button id="setCurrent" ng-click="setCurrent()">Set Current</button>
+            </div>
+            <div class="a2">
+                <img id="map" ng-src="{{mapUrl}}" />
+            </div>
+            <div class="a3">
+                <div>
+                    <h2>Home</h2>
+                    <div data-homer-loca-directive data-address="home"></div>
+                    <button id="setHome" ng-click="setHome()">Set Home</button>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <div id="box1" >
 
         <div class="mapholder static">
             <div class="map">

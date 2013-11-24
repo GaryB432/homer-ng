@@ -3,6 +3,7 @@
 
 module HomerWeb {
     'use strict';
+
     interface VenessGeo {
         // www.movable-type.co.uk/scripts/latlong.html
         parseDMS(dms: string): number;
@@ -12,6 +13,11 @@ module HomerWeb {
         toBrng(deg: number, format?: string, dp?: number): string;
     }
     declare var Geo: VenessGeo;
+    export interface ILoca {
+        coordinates: Coordinates;
+        dms: string;
+        address: string;
+    }
     export class GeoService {
         getStaticMap(home: Coordinates, current: Coordinates) {
             return GoogleMapping.StaticMap.googleMapUrl(home, current);
@@ -22,24 +28,24 @@ module HomerWeb {
     }
 
     export class HomerService {
-        public home: Homer.Loca;
-        public current: Homer.Loca;
+        public home: ILoca;
+        public current: ILoca;
         public metersToHome: number;
         constructor(public qService: ng.IQService, public geo: GeoService, public key: string) {
             this.home = this.getHome();
         }
-        public getUnsetLoca(): Homer.Loca {
+        public getUnsetLoca(): ILoca {
             return {
                 address: 'Click the Set Current button to see where you are and how from home',
                 dms: null,
                 coordinates: null
             };
         }
-        getLoca(coords: Coordinates): ng.IPromise<Homer.Loca> {
+        getLoca(coords: Coordinates): ng.IPromise<ILoca> {
             var d = this.qService.defer();
             GoogleGeocoding.GeoCoder.getAddress(
                 coords,
-                (address) => d.resolve(<Homer.Loca>{
+                (address) => d.resolve(<ILoca>{
                     coordinates: coords,
                     dms: this.geo.coordsToDMS(coords),
                     address: address
@@ -47,7 +53,7 @@ module HomerWeb {
                 (status) => d.reject(status));
             return d.promise;
         }
-        getHome(): Homer.Loca {
+        getHome(): ILoca {
             return JSON.parse(localStorage.getItem(this.key));
         }
         getStaticMap(home: Coordinates, current: Coordinates): string {
@@ -58,16 +64,16 @@ module HomerWeb {
             navigator.geolocation.getCurrentPosition((position) => def.resolve(position.coords), (e) => def.reject(e), null);
             return def.promise;
         }
-        readCurrent(): ng.IPromise<Homer.Loca> {
+        readCurrent(): ng.IPromise<ILoca> {
             return this.readNav().then((coords: Coordinates) => this.getLoca(coords));
         }
-        getCurrentLocation(): ng.IPromise<Homer.Loca> {
-            return this.readCurrent().then((loc: Homer.Loca) => {
+        getCurrentLocation(): ng.IPromise<ILoca> {
+            return this.readCurrent().then((loc: ILoca) => {
                 this.metersToHome = !!this.home ? GoogleGeocoding.GeoCoder.computeDistanceBetween(this.home.coordinates, loc.coordinates) : undefined;
                 return this.current = loc;
             });
         }
-        setHomeLocation(location: Homer.Loca): Homer.Loca {
+        setHomeLocation(location: ILoca): ILoca {
             this.home = location;
             localStorage.setItem(this.key, JSON.stringify(location));
             return this.home;

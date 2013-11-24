@@ -58,10 +58,3 @@ module GoogleMapping {
         }
     }
 }
-module Homer {
-    export interface Loca {
-        coordinates: Coordinates;
-        dms: string;
-        address: string;
-    }
-}

@@ -6,8 +6,8 @@ module HomerWeb {
 
     'use strict';
 
-    interface Scope extends ng.IScope, Homer.Loca {
-        onChange(loca: Homer.Loca): void;
+    interface Scope extends ng.IScope, ILoca {
+        onChange(loca: ILoca): void;
     }
 
     interface ILinkAttributes extends ng.IAttributes {
@@ -25,9 +25,7 @@ module HomerWeb {
             controller: ($scope: Scope, $element: JQuery, $attrs: ng.IAttributes) => {
                 $scope.onChange = (loca) => {
                     if (!!loca) {
-                        console.log('changed', loca, $element);
                         $animate.removeClass($element, 'homerfun', () => $animate.addClass($element, 'homerfun'));
-                        //$element.removeClass('homerfun').addClass('homerfun');
                     }
                 };
             },

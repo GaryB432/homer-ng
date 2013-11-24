@@ -1,5 +1,3 @@
-/// <reference path="../lib/typings/google/angular-1.0.d.ts" />
-/// <reference path="homer.ts" />
 var HomerWeb;
 (function (HomerWeb) {
     'use strict';

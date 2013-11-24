@@ -7,8 +7,8 @@ module HomerWeb {
     'use strict';
 
     interface Scope extends ng.IScope {
-        home: Homer.Loca;
-        current: Homer.Loca;
+        home: ILoca;
+        current: ILoca;
         distance: number;
         setHome: () => void;
         setCurrent: () => void;
@@ -23,16 +23,15 @@ module HomerWeb {
 
             $scope.current = homerSvc.getUnsetLoca();
 
-            //$scope.$watch('current', (current: Homer.Loca, oldVal:Homer.Loca) => console.log(current === $scope.current, oldVal));
+            //$scope.$watch('current', (current: ILoca, oldVal:ILoca) => console.log(current === $scope.current, oldVal));
 
             $scope.setHome = () => {
-                homerSvc.getCurrentLocation().then((loc: Homer.Loca) => {
+                homerSvc.getCurrentLocation().then((loc: ILoca) => {
                     $scope.home = $scope.current = homerSvc.setHomeLocation(loc);
-                    $scope.$apply();
                 }, (e) => console.log(e));
             };
 
-            var onCurrentLocationReceived = (loc: Homer.Loca) => {
+            var onCurrentLocationReceived = (loc: ILoca) => {
                 $scope.current = loc;
                 if (!!homerSvc.home) {
                     $scope.mapUrl = homerSvc.getStaticMap(homerSvc.home.coordinates, homerSvc.current.coordinates);

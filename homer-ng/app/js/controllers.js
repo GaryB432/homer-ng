@@ -1,6 +1,3 @@
-/// <reference path="../lib/typings/google/angular-1.0.d.ts" />
-/// <reference path="services.ts" />
-/// <reference path="homer.ts" />
 var HomerWeb;
 (function (HomerWeb) {
     'use strict';
@@ -13,11 +10,9 @@ var HomerWeb;
 
             $scope.current = homerSvc.getUnsetLoca();
 
-            //$scope.$watch('current', (current: Homer.Loca, oldVal:Homer.Loca) => console.log(current === $scope.current, oldVal));
             $scope.setHome = function () {
                 homerSvc.getCurrentLocation().then(function (loc) {
                     $scope.home = $scope.current = homerSvc.setHomeLocation(loc);
-                    $scope.$apply();
                 }, function (e) {
                     return console.log(e);
                 });

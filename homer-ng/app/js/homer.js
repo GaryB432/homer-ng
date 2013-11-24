@@ -1,3 +1,5 @@
+/// <reference path="../lib/typings/jquery/jquery.d.ts" />
+/// <reference path="../lib/typings/google/google.maps.d.ts" />
 var GoogleGeocoding;
 (function (GoogleGeocoding) {
     var GeoCoder = (function () {
@@ -7,6 +9,8 @@ var GoogleGeocoding;
             return google.maps.geometry.spherical.computeDistanceBetween(GoogleGeocoding.GeoCoder.getLatLng(from), GoogleGeocoding.GeoCoder.getLatLng(to), radius);
         };
         GeoCoder.getAddress = function (coords, done, fail) {
+            //fail(google.maps.GeocoderStatus.INVALID_REQUEST);
+            //setTimeout(() => done(GoogleGeocoding.GeoCoder.getLatLng(coords).toString()), 3000);
             new google.maps.Geocoder().geocode({ location: GoogleGeocoding.GeoCoder.getLatLng(coords) }, function (results, status) {
                 if (status === google.maps.GeocoderStatus.OK) {
                     done(results[0].formatted_address);

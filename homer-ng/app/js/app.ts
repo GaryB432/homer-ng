@@ -4,6 +4,7 @@ module HomerWeb {
     'use strict';
     var homerApp = angular.module('homerApp',
         [
+            'ngTouch',
             'homerControllers',
             'homerDirectives',
             'homerFilters',

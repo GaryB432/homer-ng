@@ -1,3 +1,6 @@
+/// <reference path="../lib/typings/google/angular-1.0.d.ts" />
+/// <reference path="../lib/typings/jquery/jquery.d.ts" />
+/// <reference path="homer.ts" />
 var HomerWeb;
 (function (HomerWeb) {
     'use strict';
@@ -13,6 +16,9 @@ var HomerWeb;
                 address: '='
             },
             controller: function ($scope, $element, $attrs) {
+                $scope.doStuff = function () {
+                    return alert('don\'t click that');
+                };
                 $scope.onChange = function (loca) {
                     if (!!loca) {
                         $animate.removeClass($element, 'homerfun', function () {

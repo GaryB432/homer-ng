@@ -7,6 +7,7 @@ module HomerWeb {
     'use strict';
 
     interface Scope extends ng.IScope, ILoca {
+        doStuff(): void;
         onChange(loca: ILoca): void;
     }
 
@@ -23,6 +24,7 @@ module HomerWeb {
                 address: '='
             },
             controller: ($scope: Scope, $element: JQuery, $attrs: ng.IAttributes) => {
+                $scope.doStuff = () => alert('don\'t click that');
                 $scope.onChange = (loca) => {
                     if (!!loca) {
                         $animate.removeClass($element, 'homerfun', () => $animate.addClass($element, 'homerfun'));

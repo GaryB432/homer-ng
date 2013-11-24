@@ -46,6 +46,7 @@
     <TypeScriptCompile Include="app\js\directives.ts" />
     <TypeScriptCompile Include="app\js\filters.ts" />
     <TypeScriptCompile Include="app\js\homer.ts" />
+    <TypeScriptCompile Include="app\js\services.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

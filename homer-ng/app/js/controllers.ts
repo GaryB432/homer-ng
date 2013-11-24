@@ -18,39 +18,33 @@ module HomerWeb {
     var homerControllers = angular.module('homerControllers', ['homerServices']);
 
     class HomerHomeCtrl {
-        app: Homer.App2 = new Homer.App2();
-        constructor($scope: Scope, homerService: HomerWeb.HomerService ) {
-            this.app.start();
+        constructor($scope: Scope, homerSvc: HomerWeb.HomerService ) {
+            $scope.home = homerSvc.home;
 
-            $scope.home = this.app.home;
-
-            $scope.current = homerService.getUnsetLoca();
+            $scope.current = homerSvc.getUnsetLoca();
 
             //$scope.$watch('current', (current: Homer.Loca, oldVal:Homer.Loca) => console.log(current === $scope.current, oldVal));
 
             $scope.setHome = () => {
-                $.when(this.app.getCurrentLocation()).then((loc: Homer.Loca) => {
-                    $scope.home = $scope.current = this.app.setHomeLocation(loc);
+                homerSvc.getCurrentLocation().then((loc: Homer.Loca) => {
+                    $scope.home = $scope.current = homerSvc.setHomeLocation(loc);
                     $scope.$apply();
                 }, (e) => console.log(e));
             };
 
             var onCurrentLocationReceived = (loc: Homer.Loca) => {
                 $scope.current = loc;
-                if (!!this.app.home) {
-                    $scope.mapUrl = homerService.getStaticMap(this.app.home.coordinates, this.app.current.coordinates);
-                    $scope.distance = this.app.metersToHome;
+                if (!!homerSvc.home) {
+                    $scope.mapUrl = homerSvc.getStaticMap(homerSvc.home.coordinates, homerSvc.current.coordinates);
+                    $scope.distance = homerSvc.metersToHome;
                 }
             }
 
-        $scope.setCurrent = () => {
-                $.when(this.app.getCurrentLocation())
-                    .then(onCurrentLocationReceived)
-                    .fail((e) => {
+            $scope.setCurrent = () => {
+                homerSvc.getCurrentLocation().then(
+                    onCurrentLocationReceived,
+                    (e) => {
                         $scope.current = { coordinates: null, address: e, dms: null };
-                    })
-                    .always(() => {
-                        $scope.$apply();
                     });
             };
         }

@@ -3,29 +3,79 @@
 
 module HomerWeb {
     'use strict';
-
+    interface VenessGeo {
+        // www.movable-type.co.uk/scripts/latlong.html
+        parseDMS(dms: string): number;
+        toDMS(deg: number, format?: string, dp?: number): string;
+        toLat(deg: number, format?: string, dp?: number): string;
+        toLon(deg: number, format?: string, dp?: number): string;
+        toBrng(deg: number, format?: string, dp?: number): string;
+    }
+    declare var Geo: VenessGeo;
     export class GeoService {
         getStaticMap(home: Coordinates, current: Coordinates) {
             return GoogleMapping.StaticMap.googleMapUrl(home, current);
         }
+        coordsToDMS(coords: Coordinates): string {
+            return Geo.toLat(coords.latitude).concat(',').concat(Geo.toLon(coords.longitude));
+        }
     }
 
     export class HomerService {
-        constructor(public geo: GeoService) {
+        public home: Homer.Loca;
+        public current: Homer.Loca;
+        public metersToHome: number;
+        constructor(public qService: ng.IQService, public geo: GeoService, public key: string) {
+            this.home = this.getHome();
         }
-        getUnsetLoca(): Homer.Loca {
+        public getUnsetLoca(): Homer.Loca {
             return {
                 address: 'Click the Set Current button to see where you are and how from home',
                 dms: null,
                 coordinates: null
             };
         }
+        getLoca(coords: Coordinates): ng.IPromise<Homer.Loca> {
+            var d = this.qService.defer();
+            GoogleGeocoding.GeoCoder.getAddress(
+                coords,
+                (address) => d.resolve(<Homer.Loca>{
+                    coordinates: coords,
+                    dms: this.geo.coordsToDMS(coords),
+                    address: address
+                }),
+                (status) => d.reject(status));
+            return d.promise;
+        }
+        getHome(): Homer.Loca {
+            return JSON.parse(localStorage.getItem(this.key));
+        }
         getStaticMap(home: Coordinates, current: Coordinates): string {
             return this.geo.getStaticMap(home, current);
+        }
+        readNav(): ng.IPromise<Coordinates> {
+            var def = this.qService.defer();
+            navigator.geolocation.getCurrentPosition((position) => def.resolve(position.coords), (e) => def.reject(e), null);
+            return def.promise;
+        }
+        readCurrent(): ng.IPromise<Homer.Loca> {
+            return this.readNav().then((coords: Coordinates) => this.getLoca(coords));
+        }
+        getCurrentLocation(): ng.IPromise<Homer.Loca> {
+            return this.readCurrent().then((loc: Homer.Loca) => {
+                this.metersToHome = !!this.home ? GoogleGeocoding.GeoCoder.computeDistanceBetween(this.home.coordinates, loc.coordinates) : undefined;
+                return this.current = loc;
+            });
+        }
+        setHomeLocation(location: Homer.Loca): Homer.Loca {
+            this.home = location;
+            localStorage.setItem(this.key, JSON.stringify(location));
+            return this.home;
         }
     }
 
     angular.module('homerServices', []).
+        value('homeLocationKey', 'HomeLocation').
         service('geoService', [GeoService]).
-        service('homerService', ['geoService', HomerService]);
+        service('homerService', ['$q', 'geoService', 'homeLocationKey', HomerService]);
 }

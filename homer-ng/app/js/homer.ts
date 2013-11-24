@@ -1,17 +1,6 @@
 /// <reference path="../lib/typings/jquery/jquery.d.ts" />
 /// <reference path="../lib/typings/google/google.maps.d.ts" />
 
-interface VenessGeo {
-    // www.movable-type.co.uk/scripts/latlong.html
-    parseDMS(dms: string): number;
-    toDMS(deg: number, format?: string, dp?: number): string;
-    toLat(deg: number, format?: string, dp?: number): string;
-    toLon(deg: number, format?: string, dp?: number): string;
-    toBrng(deg: number, format?: string, dp?: number): string;
-}
-
-declare var Geo: VenessGeo;
-
 module GoogleGeocoding {
     export class GeoCoder {
         static computeDistanceBetween(from: Coordinates, to: Coordinates, radius?: number) {
@@ -74,52 +63,5 @@ module Homer {
         coordinates: Coordinates;
         dms: string;
         address: string;
-    }
-    export interface CurrentLocationResponse {
-        location: Coordinates;
-        metersToHome: number;
-    }
-    export class App2 {
-        home: Loca;
-        current: Loca;
-        metersToHome: number;
-        getLoca(coords: Coordinates): JQueryPromise<Loca> {
-            var d = $.Deferred();
-            GoogleGeocoding.GeoCoder.getAddress(
-                coords,
-                (address) => d.resolve(<Loca>{
-                    coordinates: coords,
-                    dms: Geo.toLat(coords.latitude).concat(',').concat(Geo.toLon(coords.longitude)),
-                    address: address
-                }),
-                (status) => d.reject(status));
-            return d.promise();
-        }
-        start(): void {
-            this.home = JSON.parse(localStorage.getItem(App2.homePositionKey));
-            this.current = null;
-        }
-        readCurrent(): JQueryPromise<Loca> {
-            var getPosition = $.Deferred(), self = this;
-            navigator.geolocation.getCurrentPosition((position) => getPosition.resolve(position.coords), (e) => getPosition.reject(e), null);
-            return $.when(getPosition).then((coords: Coordinates) => self.getLoca(coords));
-        }
-        getCurrentLocation(): JQueryPromise<Loca> {
-            var self = this;
-            return $.when(self.readCurrent()).then((loc: Loca) => {
-                this.metersToHome = !!this.home ? GoogleGeocoding.GeoCoder.computeDistanceBetween(self.home.coordinates, loc.coordinates) : undefined;
-                return self.current = loc;
-            });
-        }
-        setHomeLocation(location: Loca): Loca {
-            this.home = location;
-            localStorage.setItem(App2.homePositionKey, JSON.stringify(location));
-            return this.home;
-        }
-        setCurrentAsHome() {
-            var self = this;
-            return $.when(this.getCurrentLocation()).then((loc: Loca) => self.setHomeLocation(loc));
-        }
-        static homePositionKey: string = 'HomeLocation';
     }
 }

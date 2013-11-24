@@ -1,3 +1,6 @@
+/// <reference path="../lib/typings/google/angular-1.0.d.ts" />
+/// <reference path="../lib/typings/jquery/jquery.d.ts" />
+/// <reference path="homer.ts" />
 var HomerWeb;
 (function (HomerWeb) {
     'use strict';
@@ -19,6 +22,7 @@ var HomerWeb;
                         $animate.removeClass($element, 'homerfun', function () {
                             return $animate.addClass($element, 'homerfun');
                         });
+                        //$element.removeClass('homerfun').addClass('homerfun');
                     }
                 };
             },

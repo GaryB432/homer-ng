@@ -1,6 +1,7 @@
 body {
   font-size: 22px;
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
 }
 div,
 h1,
@@ -12,26 +13,26 @@ button {
 .ip {
   width: 320px;
   padding: 20px 0px;
-  background: orange;
   overflow: hidden;
 }
 .ip .a1,
 .ip .a2,
 .ip .a3 {
-  padding: 0 20px;
+  padding: 5px 20px;
 }
 .ip .a2 {
   padding: 2px 15px;
 }
 .ip h2 {
   font-size: 1.5em;
-  margin: .5em 0;
+  margin: 5px 0;
+  padding: 0;
 }
 .ip button {
-  width: 280px;
-  height: 80px;
+  width: 260px;
+  height: 60px;
   font-size: 1.5em;
-  margin: 30px auto;
+  margin: 10px;
 }
 .addr {
   font-size: 1.2em;
@@ -54,6 +55,6 @@ button {
 }
 .homerfun {
   -webkit-animation-name: homerfun;
-  -webkit-animation-duration: 1s;
+  -webkit-animation-duration: .5s;
   -webkit-animation-timing-function: linear;
 }

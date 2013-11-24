@@ -1,8 +1,12 @@
 /// <reference path="../lib/typings/google/angular-1.0.d.ts" />
-'use strict';
 
-angular.module('homerFilters', []).filter('checkmark', function() {
-  return function(input) {
-    return input ? '\u2713' : '\u2718';
-  };
-});
+module HomerWeb {
+    'use strict';
+
+    angular.module('homerFilters', [])
+        .filter('distanceFilter', function () {
+            return function (meters: number, a: string) {
+                return (meters * 0.000621371192237);
+            };
+        });
+}

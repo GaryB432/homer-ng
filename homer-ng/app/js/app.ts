@@ -4,5 +4,5 @@ module HomerWeb {
 
     'use strict';
 
-    var homerApp = angular.module('homerApp', ['homerControllers', 'homerDirectives']);
+    var homerApp = angular.module('homerApp', ['homerControllers', 'homerDirectives', 'homerFilters']);
 }

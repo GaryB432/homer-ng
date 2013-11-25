@@ -5,8 +5,6 @@ var HomerWeb;
 (function (HomerWeb) {
     'use strict';
 
-    ;
-
     var homerDirectives = angular.module('homerDirectives', []);
 
     homerDirectives.directive('homerLocaDirective', function factory($parse, $animate) {

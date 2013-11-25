@@ -15,11 +15,11 @@ module.exports = function (grunt) {
             },
             dist: {
                 src: ['app/js/**/*.ts'],
-                dest: 'obj/js',
+                dest: 'tmp/js',
                 options: {
                     module: 'amd',
                     target: 'es5',
-                    base_path: 'js',
+                    base_path: 'app/js',
                     sourcemap: false,
                     noImplicitAny: true
                 }
@@ -37,7 +37,7 @@ module.exports = function (grunt) {
         },
         clean: {
             dist: {
-                src: ['dist']
+                src: ['dist', 'tmp']
             }
         },
         copy: {
@@ -46,9 +46,16 @@ module.exports = function (grunt) {
                   {
                       expand: true,
                       cwd: 'app/',
-                      src: ['**', '!lib/**', '!**/*.less'],
+                      src: ['**', '!lib/**', '!**/*.less', '!**/*.js.map', '!**/*.ts'],
                       dest: 'dist/'
-                  }
+                  },
+                {
+                    expand: true,
+                    cwd: 'tmp/',
+                    src: ['js/*.js'],
+                    dest: 'dist/'
+                }
+
                 ]
             }
         }
@@ -59,7 +66,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-typescript');
 
-    grunt.registerTask('dist', ['clean:dist', 'copy:dist']);
+    grunt.registerTask('dist', ['clean:dist', 'typescript:dist', 'copy:dist']);
     grunt.registerTask('default', ['typescript:base', 'less:base']);
 
 };

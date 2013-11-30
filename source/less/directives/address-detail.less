@@ -1,36 +1,4 @@
-﻿
-.zzaddr {
-    position: relative;
-    background: white;
-    border: 1px solid black;
-    height: 100px;
-    overflow: hidden;
-    font-size: 1.2em;
-}
-
-.coords {
-    font-size: .8em;
-}
-
-@-webkit-keyframes homerfun {
-    from {
-        -webkit-transform: scale(.3);
-        transform: scale(.3);
-    }
-
-    to {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-    }
-}
-
-.homerfun {
-    -webkit-animation-name: homerfun;
-    -webkit-animation-duration: .5s;
-    -webkit-animation-timing-function: linear;
-}
-
-.addr-container {
+﻿.addr-container {
     position: relative;
     height: 100px;
     overflow: hidden;
@@ -53,11 +21,33 @@
 
     &.ng-leave.ng-leave-active, 
     &.ng-enter {
-        top: -50px;
+        top: -110px;
     }
 
         &.ng-leave,
         &.ng-enter.ng-enter-active {
             top: 0;
         }
+}
+
+.coords {
+    font-size: .8em;
+}
+
+@-webkit-keyframes homerfun {
+    from {
+        -webkit-transform: scale(.3);
+        transform: scale(.3);
+    }
+
+    to {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+.homerfun {
+    -webkit-animation-name: homerfun;
+    -webkit-animation-duration: .5s;
+    -webkit-animation-timing-function: linear;
 }

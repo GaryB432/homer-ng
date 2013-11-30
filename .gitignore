@@ -3,6 +3,7 @@ node_modules
 source/bower_components
 appx
 # since we're using TypeScript
+source/js/*.js
 source/js/**/*.js
 source/typings
 

@@ -79,6 +79,8 @@
     <Content Include="source\less\directives.less" />
     <None Include="source\less\directives\address-detail.less" />
     <Content Include="source\less\generals.less" />
+    <Content Include="source\less\states\about.less" />
+    <Content Include="source\less\states\main.less" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitattributes" />

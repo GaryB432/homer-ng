@@ -67,6 +67,8 @@
     <TypeScriptCompile Include="source\typings\google\angular-1.0.d.ts" />
     <TypeScriptCompile Include="source\typings\google\google.maps.d.ts" />
     <TypeScriptCompile Include="source\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="source\typings\qunit\qunit.d.ts" />
+    <TypeScriptCompile Include="test\tests.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".bowerrc" />
@@ -77,6 +79,7 @@
     <Content Include="source\jade\templates\directives\address-detail.jade" />
     <Content Include="README.md" />
     <Content Include="source\less\directives.less" />
+    <Content Include="test\index.html" />
     <None Include="source\less\directives\address-detail.less" />
     <Content Include="source\less\generals.less" />
     <Content Include="source\less\states\about.less" />

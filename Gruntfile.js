@@ -69,7 +69,7 @@ module.exports = function(grunt) {
             },
             typescript: {
                 files: ['**/*.ts'], 
-                tasks: ['typescript'],
+                tasks: ['typescript', 'qunit'],
                 options: {
                     nospawn: true,
                 }
@@ -105,6 +105,9 @@ module.exports = function(grunt) {
                     comments: false
                 }
             }
+        },
+        qunit: {
+            all: ['test/**/*.html']
         }
     });
 
@@ -113,6 +116,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-typescript');

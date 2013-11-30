@@ -6,6 +6,7 @@ appx
 source/js/*.js
 source/js/**/*.js
 source/typings
+test/*.js
 
 .DS_Store
 build/*

@@ -15,6 +15,7 @@ module HomerWeb {
         coordinates: Coordinates;
         dms: string;
         address: string;
+        latLon: string;
     }
     export class GeoService {
         getStaticMap(home: Coordinates, current: Coordinates) {
@@ -36,17 +37,19 @@ module HomerWeb {
             return {
                 address: 'Where are you? Click Set Current.',
                 dms: null,
-                coordinates: null
+                coordinates: null,
+                latLon: null
             };
         }
         getLoca(coords: Coordinates): ng.IPromise<ILoca> {
-            var d = this.qService.defer();
+            var d = this.qService.defer<ILoca>();
             GoogleGeocoding.GeoCoder.getAddress(
                 coords,
                 (address) => d.resolve(<ILoca>{
                     coordinates: coords,
                     dms: this.geo.coordsToDMS(coords),
-                    address: address
+                    address: address,
+                    latLon: GoogleMapping.StaticMap.coordsToString(coords)
                 }),
                 (status) => d.reject(status));
             return d.promise;

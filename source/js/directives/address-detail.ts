@@ -14,7 +14,7 @@ module HomerWeb {
         homerLocaDirective: string;
     }
 
-    App.directive('homerLocaDirective', function factory($parse: ng.IParseService, $animate) {
+    App.directive('homerLocaDirective', function factory($parse: ng.IParseService, $animate, $timeout: ng.ITimeoutService) {
         var directiveDefinitionObject: ng.IDirective = {
             templateUrl: 'templates/directives/address-detail.html',
             scope: {
@@ -26,7 +26,8 @@ module HomerWeb {
                 };
                 $scope.onChange = (loca) => {
                     if (!!loca) {
-                        $animate.removeClass($element, 'homerfun', () => $animate.addClass($element, 'homerfun'));
+                        $scope.latLon = !!loca.coordinates ? GoogleMapping.StaticMap.coordsToString(loca.coordinates) : '';
+                        $animate.removeClass($element, 'homerfun', () => $timeout(() => $animate.addClass($element, 'homerfun'), 100, true));
                     }
                 };
                 $scope.name = $attrs.address;

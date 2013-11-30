@@ -34,10 +34,11 @@ module HomerWeb {
             }
 
             $scope.setCurrent = () => {
+                console.log('clicked');
                 homerSvc.getCurrentLocation().then(
                     onCurrentLocationReceived,
                     (e) => {
-                        $scope.current = { coordinates: null, address: e, dms: null };
+                        $scope.current = { coordinates: undefined, address: e, dms: undefined, latLon: undefined };
                     });
             };
         }

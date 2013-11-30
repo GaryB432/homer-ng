@@ -44,6 +44,9 @@ module GoogleMapping {
     export class StaticMap {
         constructor(public mapDiv: Element) {
         }
+        static coordsToString(latlon: Coordinates) {
+            return GoogleGeocoding.GeoCoder.getLatLng(latlon).toString();
+        }
         static marker(color: string, label: string, latlon: Coordinates) {
             return 'color:' + color + '%7C' + 'label:' + label + '%7C' + GoogleGeocoding.GeoCoder.getLatLng(latlon).toUrlValue();
         }

@@ -34,7 +34,7 @@ module HomerWeb {
         }
         public getUnsetLoca(): ILoca {
             return {
-                address: 'Click the Set Current button to see where you are and how from home',
+                address: 'Where are you? Click Set Current.',
                 dms: null,
                 coordinates: null
             };

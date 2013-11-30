@@ -3,7 +3,7 @@ div
 		div.a1
 			h2 Current
 			div(data-homer-loca-directive="",data-address="current")
-			div.addr {{distance | distanceFilter:'miles' | number:3}}
+			div.distance {{distance | distanceFilter:'miles' | number:3}}
 			button#setCurrent(ng-click="setCurrent()") Set Current
 		div.a2
 			img#map(ng-src="{{mapUrl}}")

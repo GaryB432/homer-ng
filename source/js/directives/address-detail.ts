@@ -20,6 +20,12 @@ module HomerWeb {
                 latLon: '&'
             },
             controller: ($scope: Scope, $element: JQuery, $attrs: ILinkAttributes) => {
+                //$element.css({
+                //    position: 'relative',
+                //    border: '1px solid red',
+                //    backgroundColor: 'lightgrey',
+                //    cursor: 'pointer'
+                //});
                 $scope.name = $attrs.address;
             }
         };

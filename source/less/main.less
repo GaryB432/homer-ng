@@ -1,0 +1,59 @@
+/* *****************************
+main.sass
+
+Rain CSS Coding Standards outlined at http://standards.mediarain.com/html-css
+
+Project: homer
+    
+****************************** */
+
+@import url('tRRtoolbelt.less');
+
+#tRRt > #reset > .meyer();
+#tRRt > #reset > .vanilla();
+
+
+
+@import url('fonts.less');
+@import url('mixins.less');
+@import url('colors.less');
+
+
+
+@import url('generals.less');
+
+/* Directive Specific Styling */
+
+@import url('directives.less');
+
+/* Individual Sections */
+
+@import url('states.less');
+
+
+.ip {
+    width: 320px;
+    padding: 20px 0px;
+    overflow: hidden;
+
+    .a1, .a2, .a3 {
+        padding: 5px 20px;
+    }
+
+    .a2 {
+        padding: 2px 15px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+        margin: 5px 0;
+        padding: 0;
+    }
+
+    button {
+        width: 260px;
+        height: 60px;
+        font-size: 1.5em;
+        margin: 10px;
+    }
+}

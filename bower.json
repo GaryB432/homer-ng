@@ -1,0 +1,12 @@
+{
+  "name": "homer",
+  "version": "0.0.0",
+  "dependencies": {
+    "jquery": "~2.0.3",
+    "angular": "~1.2.0",
+    "angular-route": "~1.2.3",
+    "angular-animate": "~1.2.3",
+    "angular-touch": "~1.2.3",
+    "angular-resource": "~1.2.3"
+  }
+}

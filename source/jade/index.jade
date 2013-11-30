@@ -1,0 +1,13 @@
+html.modern
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title homer
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width')
+    link(rel='stylesheet', href='css/style.css')
+    script(src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=geometry')
+    script(src='js/lib.js')
+    script(src='js/main.js')
+  body(ng-app='homerApp')
+    .container(ng-view='')

@@ -10,6 +10,6 @@ html.modern
 		script(src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=geometry')
 		script(src='js/lib.js')
 		script(src='js/main.js')
-	body(ng-app='homerApp')
+	body(ng-app='homerApp',data-device='phone')
 		.container(ng-view='')
 		div #{timestamp.toString()}

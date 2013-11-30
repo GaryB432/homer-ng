@@ -34,7 +34,6 @@ module HomerWeb {
             }
 
             $scope.setCurrent = () => {
-                console.log('clicked');
                 homerSvc.getCurrentLocation().then(
                     onCurrentLocationReceived,
                     (e) => {

@@ -4,9 +4,7 @@
 
 module HomerWeb {
     interface Scope extends ng.IScope, ILoca {
-        doStuff(): void;
         name: string;
-        onChange(loca: ILoca): void;
     }
 
     interface ILinkAttributes extends ng.IAttributes {
@@ -18,22 +16,11 @@ module HomerWeb {
         var directiveDefinitionObject: ng.IDirective = {
             templateUrl: 'templates/directives/address-detail.html',
             scope: {
-                address: '='
+                address: '=',
+                latLon: '&'
             },
             controller: ($scope: Scope, $element: JQuery, $attrs: ILinkAttributes) => {
-                $scope.doStuff = () => {
-                    alert('don\'t swipe that!');
-                };
-                $scope.onChange = (loca) => {
-                    if (!!loca) {
-                        $scope.latLon = !!loca.coordinates ? GoogleMapping.StaticMap.coordsToString(loca.coordinates) : '';
-                        $animate.removeClass($element, 'homerfun', () => $timeout(() => $animate.addClass($element, 'homerfun'), 100, true));
-                    }
-                };
                 $scope.name = $attrs.address;
-            },
-            link: (scope: Scope, elem: JQuery, a: ng.IAttributes) => {
-                scope.$watch('address', (newVal) => scope.onChange(newVal));
             }
         };
         return directiveDefinitionObject;

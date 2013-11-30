@@ -1,12 +1,3 @@
-App.controller('MainCtrl', function ($scope, $routeParams) {
-    $scope.awesomeThings = [
-        'jQuery',
-        'AngularJS',
-        'lessCSS',
-        'TypeScript',
-        'Karma'
-    ];
-});
 /// <reference path='../../typings/google/angular-1.0.d.ts' />
 /// <reference path="../services/homer.ts" />
 
@@ -19,8 +10,6 @@ module HomerWeb {
         setCurrent: () => void;
         mapUrl: string;
     }
-
-    var homerControllers = angular.module('homerControllers', ['homerServices']);
 
     class HomerHomeCtrl {
         constructor($scope: Scope, homerSvc: HomerWeb.HomerService) {

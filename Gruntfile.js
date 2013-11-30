@@ -19,7 +19,6 @@ module.exports = function(grunt) {
                     'source/geo/geo.js'
                 ]
             },
-            secret: grunt.file.readJSON('./secret.json'),
             pkg: grunt.file.readJSON('./package.json')
         },
         less: {

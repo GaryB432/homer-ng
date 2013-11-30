@@ -1,7 +1,7 @@
 /// <reference path='../typings/google/angular-1.0.d.ts' />
 /// <reference path='../typings/google/google.maps.d.ts' />
 
-var App = angular.module('homerApp', ['ngRoute','ngTouch' ]);
+var App = angular.module('homerApp', ['ngRoute','ngTouch', 'ngAnimate' ]);
 
 App.config(function ($routeProvider: ng.IRouteProvider) {
     $routeProvider

@@ -1,5 +1,5 @@
 ﻿div
-	div.addr(ng-mousedown="$event.preventDefault()",ng-init="addressOrCoords='coords'",ng-class="name",ng-switch="addressOrCoords",ng-swipe-left="addressOrCoords = addressOrCoords === 'coords' ? 'addr' : 'coords' ")
+	div.addr(ng-mousedown="$event.preventDefault()",ng-class="name",ng-switch="addressOrCoords",ng-swipe-left="addressOrCoords = addressOrCoords === 'coords' ? 'addr' : 'coords' ")
 		div.animate-switch(ng-switch-when="coords") TBD
 		div.animate-switch(ng-switch-default) {{address.address}}
 div.coords {{address.dms}}

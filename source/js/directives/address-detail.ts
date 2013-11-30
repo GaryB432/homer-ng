@@ -5,10 +5,12 @@
 module HomerWeb {
     interface Scope extends ng.IScope, ILoca {
         doStuff(): void;
+        name: string;
         onChange(loca: ILoca): void;
     }
 
     interface ILinkAttributes extends ng.IAttributes {
+        address: string;
         homerLocaDirective: string;
     }
 
@@ -18,7 +20,7 @@ module HomerWeb {
             scope: {
                 address: '='
             },
-            controller: ($scope: Scope, $element: JQuery, $attrs: ng.IAttributes) => {
+            controller: ($scope: Scope, $element: JQuery, $attrs: ILinkAttributes) => {
                 $scope.doStuff = () => {
                     alert('don\'t swipe that!');
                 };
@@ -27,6 +29,7 @@ module HomerWeb {
                         $animate.removeClass($element, 'homerfun', () => $animate.addClass($element, 'homerfun'));
                     }
                 };
+                $scope.name = $attrs.address;
             },
             link: (scope: Scope, elem: JQuery, a: ng.IAttributes) => {
                 scope.$watch('address', (newVal) => scope.onChange(newVal));

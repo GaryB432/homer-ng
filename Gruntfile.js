@@ -7,7 +7,7 @@ module.exports = function(grunt) {
         // Config stuff
         project: {
             javascript: {
-                ours: ['source/js/app.js', 'source/js/**/*.js', '!**/junk/*.*'],
+                ts: ['source/js/app.ts', 'source/js/**/*.ts'],
                 lib: [
                     'source/bower_components/jquery/jquery.js',
                     'source/bower_components/angular/angular.js',
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
             },
             typescript: {
                 files: ['**/*.ts'], 
-                tasks: ['typescript', 'jshint', 'concat'],
+                tasks: ['typescript'],
                 options: {
                     nospawn: true,
                 }
@@ -79,31 +79,10 @@ module.exports = function(grunt) {
             }
         },
         concat: {
-            javascript_ours: {
-                options: {
-                    banner: '"use strict";\n'
-                },
-                src: '<%= project.javascript.ours %>',
-                dest: 'app/js/main.js'
-            },
             javascript_lib: {
                 src: '<%= project.javascript.lib %>',
                 dest: 'app/js/lib.js'
             }
-        },
-        jshint: {
-            options: {
-                '-W093': true,
-                strict: false,
-                laxbreak: true,
-                debug: true,
-                globals: {
-                    angular: true,
-                    $: true,
-                    _: true
-                }
-            },
-            all: '<%= project.javascript.ours %>'
         },
         concurrent: {
             target: {
@@ -115,13 +94,12 @@ module.exports = function(grunt) {
         },
         typescript: {
             base: {
-                src: ['source/js/app.ts', 'source/js/**/*.ts', '!**/junk/*.*'],
-                dest: 'source/js',
+                src: ['source/js/app.ts', 'source/js/**/*.ts'],
+                dest: 'app/js/main.js',
                 options: {
                     module: 'amd',
                     target: 'es5',
-                    base_path: 'source/js',
-                    sourcemap: false,
+                    sourcemap: true,
                     noImplicitAny: true,
                     comments: false
                 }
@@ -139,5 +117,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-typescript');
 
   // Default task(s).
-  grunt.registerTask('default', ['less', 'typescript', 'jshint', 'concat', 'jade', 'concurrent']);
+  grunt.registerTask('default', ['less', 'typescript', 'concat', 'jade', 'concurrent']);
 };

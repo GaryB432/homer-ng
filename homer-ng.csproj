@@ -70,7 +70,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".bowerrc" />
-    <Content Include=".editorconfig" />
     <Content Include=".jshintrc" />
     <Content Include="bower.json" />
     <Content Include="package.json" />

@@ -104,6 +104,16 @@ module.exports = function(grunt) {
                     noImplicitAny: true,
                     comments: false
                 }
+            },
+            qunit: {
+                src: ['test/**/*.ts'],
+                options: {
+                    module: 'amd',
+                    target: 'es5',
+                    sourcemap: false,
+                    noImplicitAny: false,
+                    comments: false
+                }
             }
         },
         qunit: {
@@ -122,5 +132,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-typescript');
 
   // Default task(s).
-  grunt.registerTask('default', ['less', 'typescript', 'concat', 'jade', 'concurrent']);
+  grunt.registerTask('default', ['less', 'typescript', 'concat', 'jade', 'qunit', 'concurrent']);
 };

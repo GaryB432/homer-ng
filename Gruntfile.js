@@ -1,7 +1,8 @@
 "use strict";
 
 module.exports = function(grunt) {
-  // Project configuration.
+    // Project configuration.
+    var pkg = grunt.file.readJSON('./package.json');
     grunt.initConfig({
 
         // Config stuff
@@ -33,7 +34,8 @@ module.exports = function(grunt) {
                 options: {
                     data: {
                         debug: false,
-                        timestamp: "<%= new Date() %>"
+                        timestamp: "<%= new Date() %>",
+                        version: pkg.version 
                     },
                     pretty: true
                 },
@@ -132,5 +134,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-typescript');
 
   // Default task(s).
-  grunt.registerTask('default', ['less', 'typescript', 'concat', 'jade', 'qunit', 'concurrent']);
+  grunt.registerTask('default', ['less', 'typescript', 'concat', 'jade', 'qunit']);
 };

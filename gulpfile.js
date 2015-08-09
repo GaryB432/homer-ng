@@ -1,6 +1,9 @@
 var gulp = require('gulp');
+'use strict';
+
 var concat = require('gulp-concat');
 var jade = require('gulp-jade');
+var sass = require('gulp-sass');
 var pkg = require('./package.json');
 
 
@@ -30,5 +33,16 @@ gulp.task('templates', function () {
         .pipe(gulp.dest('./app/'))
 });
 
-gulp.task('default', ['scripts', 'templates']);
+gulp.task('sass', function () {
+    gulp.src('./source/sass/style.scss')
+        .pipe(sass({ outputStyle: 'compact', outFile: 'style.css' })
+            .on('error', sass.logError))
+        .pipe(gulp.dest('./app/css/'));
+});
+ 
+// gulp.task('sass:watch', function () {
+//   gulp.watch('./sass/**/*.scss', ['sass']);
+// });
+
+gulp.task('default', ['scripts', 'templates', 'sass']);
 

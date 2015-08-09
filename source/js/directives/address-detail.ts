@@ -1,7 +1,3 @@
-/// <reference path='../../typings/google/angular-1.0.d.ts' />
-/// <reference path="../../typings/jquery/jquery.d.ts" />
-/// <reference path="../services/homer.ts" />
-
 module HomerWeb {
     interface Scope extends ng.IScope, ILoca {
         name: string;
@@ -12,7 +8,7 @@ module HomerWeb {
         homerLocaDirective: string;
     }
 
-    App.directive('homerLocaDirective', function factory($parse: ng.IParseService, $animate, $timeout: ng.ITimeoutService) {
+    App.directive('homerLocaDirective', function factory($parse: ng.IParseService, $animate: ng.IAnimateService, $timeout: ng.ITimeoutService) {
         var directiveDefinitionObject: ng.IDirective = {
             templateUrl: 'templates/directives/address-detail.html',
             scope: {

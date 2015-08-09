@@ -1,23 +1,31 @@
 {
   "name": "homer",
-  "version": "2.1.0",
-  "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-concat": "*",
-    "grunt-contrib-jshint": "*",
-    "grunt-contrib-cssmin": "*",
-    "grunt-contrib-watch": "*",
-    "grunt-contrib-less": "*",
-    "grunt-concurrent": "*",
-    "load-grunt-tasks": "*",
-    "connect-livereload": "*",
-    "time-grunt": "*",
-    "grunt-contrib-jade": "~0.8.0",
-    "grunt-typescript": "~0.2.4",
-    "typescript": "~0.9.1-1",
-    "grunt-contrib-qunit": "~0.3.0"
+  "version": "3.0.0",
+  "description": "Where are you",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "test"
   },
-  "engines": {
-    "node": ">=0.8.0"
-  }
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GaryB432/homer-ng.git"
+  },
+  "keywords": [
+    "geo",
+    "typescript",
+    "angular"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GaryB432/homer-ng/issues"
+  },
+  "homepage": "https://github.com/GaryB432/homer-ng#readme"
 }

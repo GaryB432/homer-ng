@@ -1,6 +1,3 @@
-/// <reference path='../../typings/google/angular-1.0.d.ts' />
-/// <reference path="../services/homer.ts" />
-
 module HomerWeb {
     interface Scope extends ng.IScope {
         home: ILoca;

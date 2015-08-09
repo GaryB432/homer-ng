@@ -1,6 +1,3 @@
-/// <reference path='../../typings/google/angular-1.0.d.ts' />
-/// <reference path='../services/google.ts' />
-
 module HomerWeb {
     interface VenessGeo {
         // www.movable-type.co.uk/scripts/latlong.html

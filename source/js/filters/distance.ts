@@ -1,5 +1,3 @@
-/// <reference path='../../typings/google/angular-1.0.d.ts' />
-
 module HomerWeb {
     console.log(App);
 

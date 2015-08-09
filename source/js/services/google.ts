@@ -1,6 +1,3 @@
-/// <reference path='../../typings/google/angular-1.0.d.ts' />
-/// <reference path='../../typings/google/google.maps.d.ts' />
-
 module GoogleGeocoding {
     export class GeoCoder {
         static computeDistanceBetween(from: Coordinates, to: Coordinates, radius?: number) {
@@ -12,7 +9,7 @@ module GoogleGeocoding {
         static getAddress(coords: Coordinates, done: (s: string) => void, fail: (s: google.maps.GeocoderStatus) => void): void {
             //fail(google.maps.GeocoderStatus.INVALID_REQUEST);
             //setTimeout(() => done(GoogleGeocoding.GeoCoder.getLatLng(coords).toString()), 3000);
-            new google.maps.Geocoder().geocode({ location: GoogleGeocoding.GeoCoder.getLatLng(coords) }, (results: google.maps.GeocoderResult[], status) => {
+            new google.maps.Geocoder().geocode({ location: GoogleGeocoding.GeoCoder.getLatLng(coords) }, (results: google.maps.GeocoderResult[], status: google.maps.GeocoderStatus) => {
                 if (status === google.maps.GeocoderStatus.OK) {
                     done(results[0].formatted_address);
                 }

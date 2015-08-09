@@ -4,11 +4,11 @@ namespace HomerWeb {
 	}
 
 	class AboutController {
+		awesomeThings = [
+			'Lorem',
+			'Sit Amet'
+		]
 		constructor($scope: AboutScope, $routeParams: ng.route.IRouteParamsService) {
-			$scope.awesomeThings = [
-				'Lorem',
-				'Sit Amet'
-			];
 		}
 	}
 

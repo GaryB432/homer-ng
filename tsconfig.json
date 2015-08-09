@@ -3,8 +3,18 @@
         "module": "commonjs",
         "noImplicitAny": true,
         "removeComments": true,
-        "sourceMap": false,
-        "listFiles": true,
-        "declaration": false
-    }
+        "preserveConstEnums": true,
+        "out": "./app/js/main.js",
+        "sourceMap": true
+    },
+    "files": [
+        "source/typings/tsd.d.ts",
+        "source/js/app.ts",
+        "source/js/controllers/about.ts",
+        "source/js/controllers/main.ts",
+        "source/js/directives/address-detail.ts",
+        "source/js/filters/distance.ts",
+        "source/js/services/google.ts",
+        "source/js/services/homer.ts"
+    ]
 }

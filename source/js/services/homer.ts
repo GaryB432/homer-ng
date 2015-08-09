@@ -24,13 +24,13 @@ namespace HomerWeb {
     }
     
     export class HomerService {
-        public home: ILoca;
-        public current: ILoca;
-        public metersToHome: number;
-        constructor(public qService: ng.IQService, public geo: GeoService, public key: string) {
+        home: ILoca;
+        current: ILoca;
+        metersToHome: number;
+        constructor(private qService: ng.IQService, private geo: GeoService, private key: string) {
             this.home = this.readHomeFromLocalStorage();
         }
-        get unsetLoca(): ILoca {
+        get initializedLoca(): ILoca {
             return {
                 address: 'Where are you? Click Set Current.',
                 dms: null,
@@ -83,9 +83,8 @@ namespace HomerWeb {
                 return this.current = loc;
             });
         }
-        setHomeLocation(location: ILoca): ILoca {
+        setHomeLocation(location: ILoca): void {
             localStorage.setItem(this.key, angular.toJson(this.home = location));
-            return this.home;
         }
     }
 

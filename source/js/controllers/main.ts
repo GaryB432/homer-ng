@@ -1,40 +1,48 @@
 namespace HomerWeb {
-    interface Scope extends ng.IScope {
+    interface IHomerHomeCtrl {
         home: ILoca;
         current: ILoca;
         distance: number;
         setHome: () => void;
         setCurrent: () => void;
         mapUrl: string;
+        isMapVisible: boolean;
     }
 
-    class HomerHomeCtrl {
-        constructor($scope: Scope, homerSvc: HomerWeb.HomerService) {
-            $scope.home = homerSvc.home;
-            $scope.current = homerSvc.unsetLoca;
-            $scope.setHome = () => {
-                homerSvc.getCurrentLocation().then((loc: ILoca) => {
-                    $scope.home = $scope.current = homerSvc.setHomeLocation(loc);
-                }, (e) => console.log(e));
-            };
-
-            let onCurrentLocationReceived = (loc: ILoca) => {
-                $scope.current = loc;
-                if (!!homerSvc.home) {
-                    $scope.mapUrl = homerSvc.getStaticMap(homerSvc.home.coordinates, homerSvc.current.coordinates);
-                    $scope.distance = homerSvc.metersToHome;
-                }
-            }
-
-            $scope.setCurrent = () => {
-                homerSvc.getCurrentLocation().then(
-                    onCurrentLocationReceived,
-                    (e) => {
-                        $scope.current = { coordinates: undefined, address: e, dms: undefined, latLon: undefined };
-                    });
-            };
+    class HomerHomeCtrl implements IHomerHomeCtrl {
+        home: ILoca;
+        current: ILoca;
+        distance: number;
+        mapUrl: string;
+        isMapVisible: boolean;
+        constructor(private svc: HomerWeb.HomerService) {
+            this.home = this.svc.home;
+            this.initializeCurrent();
+        }
+        setCurrent() {
+            this.svc.getCurrentLocation()
+                .then((current: ILoca) => {
+                    this.current = current;
+                    if (!!this.home) {
+                        this.mapUrl = this.svc.getStaticMap(this.home.coordinates, this.current.coordinates);
+                        this.distance = this.svc.metersToHome;
+                        this.isMapVisible = true;
+                    }
+                }, (e) => { this.current = { coordinates: undefined, address: e, dms: undefined, latLon: undefined }; });
+        }
+        setHome() {
+            this.svc.getCurrentLocation()
+                .then((current: ILoca) => {
+                    this.svc.setHomeLocation(this.home = current);
+                    this.initializeCurrent();
+                }, (e) => { alert(e); });
+        }
+        private initializeCurrent() {
+            this.current = this.svc.initializedLoca;
+            this.distance = undefined;
+            this.isMapVisible = false;
         }
     }
 
-    App.controller('HomerHomeCtrl', ['$scope', 'homerService', HomerHomeCtrl]);
+    App.controller('HomerHomeCtrl', ['homerService', HomerHomeCtrl]);
 }

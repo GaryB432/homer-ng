@@ -22,24 +22,24 @@ namespace HomerWeb {
             return Geo.toLat(coords.latitude).concat(',').concat(Geo.toLon(coords.longitude));
         }
     }
-
+    
     export class HomerService {
         public home: ILoca;
         public current: ILoca;
         public metersToHome: number;
         constructor(public qService: ng.IQService, public geo: GeoService, public key: string) {
-            this.home = this.getHome();
+            this.home = this.readHomeFromLocalStorage();
         }
-        public getUnsetLoca(): ILoca {
+        get unsetLoca(): ILoca {
             return {
                 address: 'Where are you? Click Set Current.',
                 dms: null,
                 coordinates: null,
-                latLon: null
+                latLon: 'You need to click Set Current for this to be any fun.'
             };
         }
         getLoca(coords: Coordinates): ng.IPromise<ILoca> {
-            var d = this.qService.defer<ILoca>();
+            let d = this.qService.defer<ILoca>();
             GoogleGeocoding.GeoCoder.getAddress(
                 coords,
                 (address) => d.resolve(<ILoca>{
@@ -51,7 +51,7 @@ namespace HomerWeb {
                 (status) => d.reject(status));
             return d.promise;
         }
-        getHome(): ILoca {
+        readHomeFromLocalStorage(): ILoca {
             return angular.fromJson(localStorage.getItem(this.key));
         }
         getStaticMap(home: Coordinates, current: Coordinates): string {

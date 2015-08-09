@@ -1,5 +1,7 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
+var jade = require('gulp-jade');
+var pkg = require('./package.json');
 
 
 gulp.task('scripts', function () {
@@ -14,5 +16,19 @@ gulp.task('scripts', function () {
         .pipe(concat('lib.js'))
         .pipe(gulp.dest('./app/js/'));
 });
- 
-gulp.task('default', ['scripts']);
+
+gulp.task('templates', function () {
+    gulp.src('./source/jade/**/*.jade')
+        .pipe(jade({
+            data: {
+                debug: false,
+                timestamp: new Date().toISOString(),
+                version: pkg.version
+            },
+            pretty: true
+        }))
+        .pipe(gulp.dest('./app/'))
+});
+
+gulp.task('default', ['scripts', 'templates']);
+

@@ -1,4 +1,4 @@
-module HomerWeb {
+namespace HomerWeb {
     interface VenessGeo {
         // www.movable-type.co.uk/scripts/latlong.html
         parseDMS(dms: string): number;

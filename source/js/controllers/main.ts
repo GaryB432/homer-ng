@@ -1,4 +1,4 @@
-module HomerWeb {
+namespace HomerWeb {
     interface Scope extends ng.IScope {
         home: ILoca;
         current: ILoca;

@@ -1,4 +1,4 @@
-module GoogleGeocoding {
+namespace GoogleGeocoding {
     export class GeoCoder {
         static computeDistanceBetween(from: Coordinates, to: Coordinates, radius?: number) {
             return google.maps.geometry.spherical.computeDistanceBetween(
@@ -24,7 +24,7 @@ module GoogleGeocoding {
     }
 }
 
-module GoogleMapping {
+namespace GoogleMapping {
     export class DynamicMap {
         map: google.maps.Map;
         constructor(mapDiv: Element, opts?: google.maps.MapOptions) {

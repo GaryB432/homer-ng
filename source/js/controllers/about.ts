@@ -1,8 +1,9 @@
-interface AboutScope extends ng.IScope{
-	awesomeThings: string[]
-}
+namespace HomerWeb {
+	interface AboutScope extends ng.IScope {
+		awesomeThings: string[]
+	}
 
-App.controller('AboutCtrl', function ($scope: AboutScope, $routeParams: ng.route.IRouteParamsService) {
+	App.controller('AboutCtrl', function($scope: AboutScope, $routeParams: ng.route.IRouteParamsService) {
 		$scope.awesomeThings = [
 			'Lorem',
 			'Ipsum',
@@ -10,3 +11,4 @@ App.controller('AboutCtrl', function ($scope: AboutScope, $routeParams: ng.route
 			'Sit Amet'
 		];
 	});
+}

@@ -8,20 +8,14 @@ namespace HomerWeb {
         homerLocaDirective: string;
     }
 
-    App.directive('homerLocaDirective', function factory($parse: ng.IParseService, $animate: ng.IAnimateService, $timeout: ng.ITimeoutService) {
-        var directiveDefinitionObject: ng.IDirective = {
+    App.directive('homerLocaDirective', function factory($animate: ng.IAnimateService) {
+        let directiveDefinitionObject: ng.IDirective = {
             templateUrl: 'templates/directives/address-detail.html',
             scope: {
                 address: '=',
                 latLon: '&'
             },
             controller: ($scope: Scope, $element: JQuery, $attrs: ILinkAttributes) => {
-                //$element.css({
-                //    position: 'relative',
-                //    border: '1px solid red',
-                //    backgroundColor: 'lightgrey',
-                //    cursor: 'pointer'
-                //});
                 $scope.name = $attrs.address;
             }
         };

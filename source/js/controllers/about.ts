@@ -3,12 +3,14 @@ namespace HomerWeb {
 		awesomeThings: string[]
 	}
 
-	App.controller('AboutCtrl', function($scope: AboutScope, $routeParams: ng.route.IRouteParamsService) {
-		$scope.awesomeThings = [
-			'Lorem',
-			'Ipsum',
-			'Dolar',
-			'Sit Amet'
-		];
-	});
+	class AboutController {
+		constructor($scope: AboutScope, $routeParams: ng.route.IRouteParamsService) {
+			$scope.awesomeThings = [
+				'Lorem',
+				'Sit Amet'
+			];
+		}
+	}
+
+	App.controller('AboutCtrl', AboutController);
 }

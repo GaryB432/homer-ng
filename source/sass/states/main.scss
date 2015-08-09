@@ -1,43 +1,30 @@
-body {
+.ip {
+	width: 320px;
+	padding: 20px 0px;
+	overflow: hidden;
+	
+		.a1, .a2, .a3 {
+			padding: 5px 20px;
+		}
+	
+		.a2 {
+			padding: 2px 15px;
+		}
+	
+		h2 {
+			font-size: 1.5em;
+			margin: 5px 0;
+			padding: 0;
+		}
+	
+		button {
+			width: 260px;
+			height: 60px;
+			font-size: 1.5em;
+			margin: 10px;
+	}
+}
 
-    &[data-device="desktop"] {
-    }
-
-    &[data-device="tablet"] {
-    }
-
-    &[data-device="phone"] {
-
-
-        .ip {
-            width: 320px;
-            padding: 20px 0px;
-            overflow: hidden;
-
-            .a1, .a2, .a3 {
-                padding: 5px 20px;
-            }
-
-            .a2 {
-                padding: 2px 15px;
-            }
-
-            h2 {
-                font-size: 1.5em;
-                margin: 5px 0;
-                padding: 0;
-            }
-
-            button {
-                width: 260px;
-                height: 60px;
-                font-size: 1.5em;
-                margin: 10px;
-            }
-        }
-
-        .distance {
-            font-size: 1.1em;
-        }
-    }
+.distance {
+	font-size: 1.1em;
 }

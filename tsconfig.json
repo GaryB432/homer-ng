@@ -8,7 +8,7 @@
         "sourceMap": true
     },
     "files": [
-        "source/typings/tsd.d.ts",
+        "typings/tsd.d.ts",
         "source/js/app.ts",
         "source/js/controllers/about.ts",
         "source/js/controllers/main.ts",

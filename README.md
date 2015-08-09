@@ -4,3 +4,13 @@ Just a mashup of [angular.js](http://angularjs.org), [TypeScript](http://typescr
 Also including localstorage and `navigator.getPosition()`
 
 Visit [http://bortosky.com/mobile/homer/index.html](http://bortosky.com/mobile/homer/index.html) on your mobile device.
+
+### Getting started
+
+From the command line in your project directory
+
+- run npm install
+- run bower install
+- run tsd reinstall -so
+- run grunt
+

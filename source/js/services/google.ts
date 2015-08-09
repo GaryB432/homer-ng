@@ -39,23 +39,16 @@ namespace GoogleMapping {
         }
     }
     export class StaticMap {
-        constructor(public mapDiv: Element) {
-        }
         static coordsToString(latlon: Coordinates) {
             return GoogleGeocoding.GeoCoder.getLatLng(latlon).toString();
         }
-        static marker(color: string, label: string, latlon: Coordinates) {
-            return 'color:' + color + '%7C' + 'label:' + label + '%7C' + GoogleGeocoding.GeoCoder.getLatLng(latlon).toUrlValue();
-        }
         static googleMapUrl(home: Coordinates, current: Coordinates): string {
-            return 'https://maps.googleapis.com/maps/api/staticmap?size=290x345&sensor=true' +
+            return 'https://maps.googleapis.com/maps/api/staticmap?size=290x345' +
                 '&markers=' + StaticMap.marker('green', 'C', current) +
                 '&markers=' + StaticMap.marker('blue', 'H', home);
         }
-        static googleMapImage(home: Coordinates, current: Coordinates): Element {
-            var img = document.createElement("img");
-            img.src = GoogleMapping.StaticMap.googleMapUrl(home, current);
-            return img;
+        private static marker(color: string, label: string, latlon: Coordinates) {
+            return 'color:' + color + '%7C' + 'label:' + label + '%7C' + GoogleGeocoding.GeoCoder.getLatLng(latlon).toUrlValue();
         }
     }
 }

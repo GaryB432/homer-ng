@@ -52,14 +52,26 @@ namespace HomerWeb {
             return d.promise;
         }
         getHome(): ILoca {
-            return JSON.parse(localStorage.getItem(this.key));
+            return angular.fromJson(localStorage.getItem(this.key));
         }
         getStaticMap(home: Coordinates, current: Coordinates): string {
             return this.geo.getStaticMap(home, current);
         }
         readNav(): ng.IPromise<Coordinates> {
-            var def = this.qService.defer();
-            navigator.geolocation.getCurrentPosition((position) => def.resolve(position.coords), (e) => def.reject(e), null);
+            let def = this.qService.defer();
+            navigator.geolocation.getCurrentPosition(
+                (position) =>
+                    // make copy of coordinates because of native flakiness
+                    def.resolve({
+                        accuracy: position.coords.accuracy,
+                        altitude: position.coords.altitude,
+                        altitudeAccuracy: position.coords.altitudeAccuracy,
+                        heading: position.coords.heading,
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                        speed: position.coords.speed
+                    }),
+                (e) => def.reject(e), null);
             return def.promise;
         }
         readCurrent(): ng.IPromise<ILoca> {
@@ -72,8 +84,7 @@ namespace HomerWeb {
             });
         }
         setHomeLocation(location: ILoca): ILoca {
-            this.home = location;
-            localStorage.setItem(this.key, JSON.stringify(location));
+            localStorage.setItem(this.key, angular.toJson(this.home = location));
             return this.home;
         }
     }

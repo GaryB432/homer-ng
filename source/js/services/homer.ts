@@ -8,7 +8,7 @@ namespace HomerWeb {
         toBrng(deg: number, format?: string, dp?: number): string;
     }
     declare var Geo: VenessGeo;
-    export interface ILoca {
+    export interface ILocation {
         coordinates: Coordinates;
         dms: string;
         address: string;
@@ -24,13 +24,13 @@ namespace HomerWeb {
     }
     
     export class HomerService {
-        home: ILoca;
-        current: ILoca;
+        home: ILocation;
+        current: ILocation;
         metersToHome: number;
         constructor(private qService: ng.IQService, private geo: GeoService, private key: string) {
             this.home = this.readHomeFromLocalStorage();
         }
-        get initializedLoca(): ILoca {
+        get initializedLoca(): ILocation {
             return {
                 address: 'Where are you? Click Set Current.',
                 dms: null,
@@ -38,11 +38,11 @@ namespace HomerWeb {
                 latLon: 'You need to click Set Current for this to be any fun.'
             };
         }
-        getLoca(coords: Coordinates): ng.IPromise<ILoca> {
-            let d = this.qService.defer<ILoca>();
+        getLoca(coords: Coordinates): ng.IPromise<ILocation> {
+            let d = this.qService.defer<ILocation>();
             GoogleGeocoding.GeoCoder.getAddress(
                 coords,
-                (address) => d.resolve(<ILoca>{
+                (address) => d.resolve(<ILocation>{
                     coordinates: coords,
                     dms: this.geo.coordsToDMS(coords),
                     address: address,
@@ -51,7 +51,7 @@ namespace HomerWeb {
                 (status) => d.reject(status));
             return d.promise;
         }
-        readHomeFromLocalStorage(): ILoca {
+        readHomeFromLocalStorage(): ILocation {
             return angular.fromJson(localStorage.getItem(this.key));
         }
         getStaticMap(home: Coordinates, current: Coordinates): string {
@@ -74,16 +74,16 @@ namespace HomerWeb {
                 (e) => def.reject(e), null);
             return def.promise;
         }
-        readCurrent(): ng.IPromise<ILoca> {
+        readCurrent(): ng.IPromise<ILocation> {
             return this.readNav().then((coords: Coordinates) => this.getLoca(coords));
         }
-        getCurrentLocation(): ng.IPromise<ILoca> {
-            return this.readCurrent().then((loc: ILoca) => {
+        getCurrentLocation(): ng.IPromise<ILocation> {
+            return this.readCurrent().then((loc: ILocation) => {
                 this.metersToHome = !!this.home ? GoogleGeocoding.GeoCoder.computeDistanceBetween(this.home.coordinates, loc.coordinates) : undefined;
                 return this.current = loc;
             });
         }
-        setHomeLocation(location: ILoca): void {
+        setHomeLocation(location: ILocation): void {
             localStorage.setItem(this.key, angular.toJson(this.home = location));
         }
     }

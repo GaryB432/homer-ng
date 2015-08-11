@@ -1,7 +1,7 @@
 namespace HomerWeb {
     interface IHomerHomeCtrl {
-        home: ILoca;
-        current: ILoca;
+        home: ILocation;
+        current: ILocation;
         distance: number;
         setHome: () => void;
         setCurrent: () => void;
@@ -10,8 +10,8 @@ namespace HomerWeb {
     }
 
     class HomerHomeCtrl implements IHomerHomeCtrl {
-        home: ILoca;
-        current: ILoca;
+        home: ILocation;
+        current: ILocation;
         distance: number;
         mapUrl: string;
         isMapVisible: boolean;
@@ -21,7 +21,7 @@ namespace HomerWeb {
         }
         setCurrent() {
             this.svc.getCurrentLocation()
-                .then((current: ILoca) => {
+                .then((current: ILocation) => {
                     this.current = current;
                     if (!!this.home) {
                         this.mapUrl = this.svc.getStaticMap(this.home.coordinates, this.current.coordinates);
@@ -32,7 +32,7 @@ namespace HomerWeb {
         }
         setHome() {
             this.svc.getCurrentLocation()
-                .then((current: ILoca) => {
+                .then((current: ILocation) => {
                     this.svc.setHomeLocation(this.home = current);
                     this.initializeCurrent();
                 }, (e) => { alert(e); });

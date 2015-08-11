@@ -17,6 +17,6 @@ describe('Distance Filter', function () {
     });
 
     it('should convert to miles', function () {
-        expect(df(1609.34, 'miles')).toBeCloseTo(1, 1);
+        expect(df(45061.632, 'miles')).toBeCloseTo(28);
     });
 });

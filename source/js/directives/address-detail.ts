@@ -1,5 +1,5 @@
 namespace HomerWeb {
-    interface Scope extends ng.IScope, ILoca {
+    interface Scope extends ng.IScope, ILocation {
         name: string;
     }
 

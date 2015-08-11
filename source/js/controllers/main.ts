@@ -33,12 +33,12 @@ namespace HomerWeb {
         setHome() {
             this.svc.getCurrentLocation()
                 .then((current: ILocation) => {
-                    this.svc.setHomeLocation(this.home = current);
+                    this.svc.saveHomeLocation(this.home = current);
                     this.initializeCurrent();
                 }, (e) => { alert(e); });
         }
         private initializeCurrent() {
-            this.current = this.svc.initializedLoca;
+            this.current = this.svc.initializedLocation;
             this.distance = undefined;
             this.isMapVisible = false;
         }

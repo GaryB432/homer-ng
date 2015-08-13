@@ -1,4 +1,4 @@
 ﻿.addr-container(ng-mousedown="$event.preventDefault()",ng-class="name",class="ng-animate",ng-switch="addressOrCoords",ng-swipe-left="addressOrCoords=addressOrCoords==='coords'?'addr':'coords'")
-	.addr(ng-switch-when="coords") {{address.latLon}}
-	.addr(ng-switch-default) {{address.address}}
-.coords {{address.dms}}
+	.addr(ng-switch-when="coords") {{location.latLon}}
+	.addr(ng-switch-default) {{location.address}}
+.coords {{location.dms}}

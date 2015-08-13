@@ -1,12 +1,12 @@
 .ip
 	.a1
 		h2 Current
-		homer-location(address="vm.current")
+		homer-location(location="vm.current")
 		.distance {{vm.distance | distanceFilter:'miles' | number:3}}
 		button#setCurrent(ng-click="vm.setCurrent()") Set Current
 	.a2
 		img#map(ng-show="vm.isMapVisible" ng-src="{{vm.mapUrl}}")
 	.a3
 		h2 Home
-		homer-location(address="vm.home")
+		homer-location(location="vm.home")
 		button#setHome(ng-click="vm.setHome()") Set Home

@@ -1,12 +1,12 @@
-div.ip
-	div.a1
+.ip
+	.a1
 		h2 Current
-		homer-loca-directive(address="vm.current")
-		div.distance {{vm.distance | distanceFilter:'miles' | number:3}}
+		homer-location(address="vm.current")
+		.distance {{vm.distance | distanceFilter:'miles' | number:3}}
 		button#setCurrent(ng-click="vm.setCurrent()") Set Current
-	div.a2
+	.a2
 		img#map(ng-show="vm.isMapVisible" ng-src="{{vm.mapUrl}}")
-	div.a3
+	.a3
 		h2 Home
-		homer-loca-directive(address="vm.home")
+		homer-location(address="vm.home")
 		button#setHome(ng-click="vm.setHome()") Set Home

@@ -8,9 +8,9 @@ namespace HomerWeb {
         homerLocaDirective: string;
     }
 
-    App.directive('homerLocaDirective', function factory($animate: ng.IAnimateService) {
+    App.directive('homerLocation', function factory($animate: ng.IAnimateService) {
         let directiveDefinitionObject: ng.IDirective = {
-            templateUrl: 'templates/directives/address-detail.html',
+            templateUrl: 'templates/directives/location.html',
             scope: {
                 address: '=',
                 latLon: '&'

@@ -13,7 +13,7 @@
         "source/js/app.ts",
         "source/js/controllers/about.ts",
         "source/js/controllers/main.ts",
-        "source/js/directives/address-detail.ts",
+        "source/js/directives/location.ts",
         "source/js/filters/distance.ts",
         "source/js/services/geo.ts",
         "source/js/services/google.ts",

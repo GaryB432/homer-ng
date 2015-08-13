@@ -11,28 +11,6 @@ declare var Geo: VenessGeo;
 
 namespace HomerWeb {
 
-    class StorageService {
-        keys: IStorageKeys = {
-            homeLocationKey: 'HomeLocation',
-            currentLocationKey: 'currentLocation'
-        };
-
-        saveHomeLocation(location: ILocation): void {
-            localStorage.setItem(this.keys.homeLocationKey, angular.toJson(location));
-        }
-        readHome(): ILocation {
-            return this.read<ILocation>(this.keys.homeLocationKey);
-        }
-        private read<T>(key: string) {
-            return <T>angular.fromJson(localStorage.getItem(key));
-        }
-    }
-
-    interface IStorageKeys {
-        homeLocationKey: string;
-        currentLocationKey: string;
-    }
-
     export interface ILocation {
         coordinates: Coordinates;
         dms: string;
@@ -40,7 +18,6 @@ namespace HomerWeb {
         latLon: string;
     }
     export class GeoService {
-
         getStaticMap(home: Coordinates, current: Coordinates) {
             return GoogleMapping.StaticMap.googleMapUrl(home, current);
         }
@@ -53,7 +30,7 @@ namespace HomerWeb {
         home: ILocation;
         metersToHome: number;
         constructor(private qService: ng.IQService, private geo: GeoService, private storageSvc: StorageService) {
-            this.home = this.readHome();
+            this.home = this.storageSvc.readHome();
         }
         get initializedLocation(): ILocation {
             return {
@@ -79,7 +56,7 @@ namespace HomerWeb {
             let d = this.qService.defer<ILocation>();
             GoogleGeocoding.GeoCoder.getAddress(
                 coords,
-                (address) => d.resolve(<ILocation>{
+                (address) => d.resolve({
                     coordinates: coords,
                     dms: this.geo.coordsToDMS(coords),
                     address: address,
@@ -88,11 +65,8 @@ namespace HomerWeb {
                 (status) => d.reject(status));
             return d.promise;
         }
-        private readHome(): ILocation {
-            return this.storageSvc.readHome();
-        }        
          private readNav(): ng.IPromise<Coordinates> {
-            let def = this.qService.defer();
+            let def = this.qService.defer<Coordinates>();
             navigator.geolocation.getCurrentPosition(
                 (position) =>
                     // make copy of coordinates because of native flakiness

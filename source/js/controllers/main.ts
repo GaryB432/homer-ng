@@ -1,48 +1,41 @@
 namespace HomerWeb {
-    interface IHomerHomeCtrl {
-        home: ILocation;
-        current: ILocation;
-        distance: number;
-        setHome: () => void;
-        setCurrent: () => void;
-        mapUrl: string;
-        isMapVisible: boolean;
-    }
 
-    class HomerHomeCtrl implements IHomerHomeCtrl {
-        home: ILocation;
-        current: ILocation;
-        distance: number;
-        mapUrl: string;
-        isMapVisible: boolean;
-        constructor(private svc: HomerWeb.HomerService) {
-            this.home = this.svc.home;
-            this.initializeCurrent();
-        }
-        setCurrent() {
-            this.svc.getCurrentLocation()
-                .then((current: ILocation) => {
-                    this.current = current;
-                    if (!!this.home) {
-                        this.mapUrl = this.svc.getStaticMap(this.home.coordinates, this.current.coordinates);
-                        this.distance = this.svc.metersToHome;
-                        this.isMapVisible = true;
-                    }
-                }, (e) => { this.current = { coordinates: undefined, address: e, dms: undefined, latLon: undefined }; });
-        }
-        setHome() {
-            this.svc.getCurrentLocation()
-                .then((current: ILocation) => {
-                    this.svc.saveHomeLocation(this.home = current);
-                    this.initializeCurrent();
-                }, (e) => { alert(e); });
-        }
-        private initializeCurrent() {
-            this.current = this.svc.initializedLocation;
-            this.distance = undefined;
-            this.isMapVisible = false;
-        }
-    }
+	interface IHomerHomeCtrl {
+		home: ILocation;
+		last: ISpot;
+		//current: ILocation;
+		distance: number;
+		setHome: () => void;
+		setCurrent: () => void;
+		mapUrl: string;
+		isMapVisible: boolean;
+	}
 
-    App.controller('HomerHomeCtrl', ['homerService', HomerHomeCtrl]);
+	class HomerHomeCtrl implements IHomerHomeCtrl {
+		constructor(private svc: HomerWeb.HomerService) {
+		}
+		get home(): ILocation {
+			return this.svc.home;
+		}
+		get last() {
+			return this.svc.last;
+		}
+		get distance() {
+			return this.svc.metersToHome;
+		}
+		get mapUrl() {
+			return this.svc.mapUrl;
+		}
+		get isMapVisible(): boolean {
+			return !!this.svc.mapUrl;
+		}
+		setHome() {
+			this.svc.setHome().then((home) => console.log(home));
+		}
+		setCurrent() {
+			this.svc.setCurrent().then((current) => console.log(current));
+		}
+	}
+
+	App.controller('HomerHomeCtrl', ['homerService', HomerHomeCtrl]);
 }

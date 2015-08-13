@@ -1,4 +1,4 @@
-var App = angular.module('homerApp', ['ngRoute','ngTouch', 'ngAnimate' ]);
+var App = angular.module('homerApp', ['ngRoute','ngTouch', 'ngAnimate', 'angularMoment' ]);
 
 App.config(function ($routeProvider: ng.route.IRouteProvider) {
     $routeProvider

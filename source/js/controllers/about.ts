@@ -2,7 +2,6 @@ namespace HomerWeb {
 	interface AboutScope extends ng.IScope {
 		awesomeThings: string[]
 	}
-
 	class AboutCtrl {
 		awesomeThings = [
 			'Lorem',

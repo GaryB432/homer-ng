@@ -5,7 +5,8 @@
     "angular": "~1.4.3",
     "angular-route": "~1.4.3",
     "angular-animate": "~1.4.3",
-    "angular-touch": "~1.4.3"
+    "angular-touch": "~1.4.3",
+    "angular-moment": "~0.10.2"
   },
   "devDependencies": {
     "jasmine-core": "~2.3.4",

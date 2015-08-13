@@ -1,7 +1,7 @@
 .ip
 	.a1
 		h2 Current
-		homer-location(location="vm.current")
+		homer-spot(spot="vm.last")
 		.distance {{vm.distance | distanceFilter:'miles' | number:3}}
 		button#setCurrent(ng-click="vm.setCurrent()") Set Current
 	.a2

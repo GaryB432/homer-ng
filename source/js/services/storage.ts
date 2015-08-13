@@ -20,4 +20,5 @@ namespace HomerWeb {
             return <T>angular.fromJson(localStorage.getItem(key));
         }
     }
+    App.service('storageService', [StorageService]);
 }

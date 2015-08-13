@@ -15,6 +15,7 @@
         "source/js/controllers/main.ts",
         "source/js/directives/address-detail.ts",
         "source/js/filters/distance.ts",
+        "source/js/services/geo.ts",
         "source/js/services/google.ts",
         "source/js/services/homer.ts",
         "source/js/services/storage.ts"

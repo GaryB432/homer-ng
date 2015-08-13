@@ -10,7 +10,7 @@ namespace HomerWeb {
         home: ILocation;
         metersToHome: number;
         constructor(private qService: ng.IQService, private geo: GeoService, private storageSvc: StorageService) {
-            this.home = this.storageSvc.readHome();
+            this.home = this.storageSvc.readHomeLocation();
         }
         get initializedLocation(): ILocation {
             return {

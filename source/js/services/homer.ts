@@ -1,13 +1,38 @@
+interface VenessGeo {
+    // www.movable-type.co.uk/scripts/latlong.html
+    parseDMS(dms: string): number;
+    toDMS(deg: number, format?: string, dp?: number): string;
+    toLat(deg: number, format?: string, dp?: number): string;
+    toLon(deg: number, format?: string, dp?: number): string;
+    toBrng(deg: number, format?: string, dp?: number): string;
+}
+
+declare var Geo: VenessGeo;
+
 namespace HomerWeb {
-    interface VenessGeo {
-        // www.movable-type.co.uk/scripts/latlong.html
-        parseDMS(dms: string): number;
-        toDMS(deg: number, format?: string, dp?: number): string;
-        toLat(deg: number, format?: string, dp?: number): string;
-        toLon(deg: number, format?: string, dp?: number): string;
-        toBrng(deg: number, format?: string, dp?: number): string;
+
+    class StorageService {
+        keys: IStorageKeys = {
+            homeLocationKey: 'HomeLocation',
+            currentLocationKey: 'currentLocation'
+        };
+
+        saveHomeLocation(location: ILocation): void {
+            localStorage.setItem(this.keys.homeLocationKey, angular.toJson(location));
+        }
+        readHome(): ILocation {
+            return this.read<ILocation>(this.keys.homeLocationKey);
+        }
+        private read<T>(key: string) {
+            return <T>angular.fromJson(localStorage.getItem(key));
+        }
     }
-    declare var Geo: VenessGeo;
+
+    interface IStorageKeys {
+        homeLocationKey: string;
+        currentLocationKey: string;
+    }
+
     export interface ILocation {
         coordinates: Coordinates;
         dms: string;
@@ -15,6 +40,7 @@ namespace HomerWeb {
         latLon: string;
     }
     export class GeoService {
+
         getStaticMap(home: Coordinates, current: Coordinates) {
             return GoogleMapping.StaticMap.googleMapUrl(home, current);
         }
@@ -22,11 +48,11 @@ namespace HomerWeb {
             return Geo.toLat(coords.latitude).concat(',').concat(Geo.toLon(coords.longitude));
         }
     }
-    
+
     export class HomerService {
         home: ILocation;
         metersToHome: number;
-        constructor(private qService: ng.IQService, private geo: GeoService, private key: string) {
+        constructor(private qService: ng.IQService, private geo: GeoService, private storageSvc: StorageService) {
             this.home = this.readHome();
         }
         get initializedLocation(): ILocation {
@@ -47,7 +73,7 @@ namespace HomerWeb {
             });
         }
         saveHomeLocation(location: ILocation): void {
-            localStorage.setItem(this.key, angular.toJson(this.home = location));
+            this.storageSvc.saveHomeLocation(location);
         }
         private getLocation(coords: Coordinates): ng.IPromise<ILocation> {
             let d = this.qService.defer<ILocation>();
@@ -63,9 +89,9 @@ namespace HomerWeb {
             return d.promise;
         }
         private readHome(): ILocation {
-            return angular.fromJson(localStorage.getItem(this.key));
-        }
-        private readNav(): ng.IPromise<Coordinates> {
+            return this.storageSvc.readHome();
+        }        
+         private readNav(): ng.IPromise<Coordinates> {
             let def = this.qService.defer();
             navigator.geolocation.getCurrentPosition(
                 (position) =>
@@ -81,14 +107,14 @@ namespace HomerWeb {
                     }),
                 (e) => def.reject(e), null);
             return def.promise;
-        }
+        }       
         private readCurrent(): ng.IPromise<ILocation> {
             return this.readNav().then((coords: Coordinates) => this.getLocation(coords));
         }
     }
 
     App
-        .value('homeLocationKey', 'HomeLocation')
+        .service('storageService', [StorageService])
         .service('geoService', [GeoService])
-        .service('homerService', ['$q', 'geoService', 'homeLocationKey', HomerService]);
+        .service('homerService', ['$q', 'geoService', 'storageService', HomerService]);
 }

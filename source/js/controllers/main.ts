@@ -3,7 +3,6 @@ namespace HomerWeb {
 	interface IHomerHomeCtrl {
 		home: ILocation;
 		last: ISpot;
-		//current: ILocation;
 		distance: number;
 		setHome: () => void;
 		setCurrent: () => void;

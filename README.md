@@ -12,5 +12,5 @@ From the command line in your project directory
 - run npm install
 - run bower install
 - run tsd reinstall -so
-- run grunt
+- run gulp
 

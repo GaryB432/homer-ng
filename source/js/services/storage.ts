@@ -20,7 +20,7 @@ namespace HomerWeb {
             return this.save<IInfo>(KEY, info);
         }
         readInfo(): IInfo {
-            let info = this.read<IInfo>(KEY) || { home: undefined,last: undefined };
+            let info = this.read<IInfo>(KEY) || { home: undefined, last: undefined };
             if (!info.home) {
                 info.home = tempLocation;
             }

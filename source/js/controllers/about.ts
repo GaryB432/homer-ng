@@ -5,7 +5,8 @@ namespace HomerWeb {
 	class AboutCtrl {
 		awesomeThings = [
 			'Lorem',
-			'Sit Amet'
+			'Sit Amet',
+			'EcmaScript'
 		]
 		constructor(params: ng.route.IRouteParamsService) {
 				console.log(params);

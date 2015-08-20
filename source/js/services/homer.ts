@@ -50,10 +50,7 @@ namespace HomerWeb {
             return GoogleGeocoding.GeoCoder.computeDistanceBetween(info.home.coordinates, info.last.location.coordinates);
         }
         get mapUrl(): string {
-            return this.getStaticMap(this._info.home.coordinates, this._info.last.location.coordinates);
-        }
-        private getStaticMap(home: Coordinates, current: Coordinates): string {
-            return this.geo.getStaticMap(home, current);
+            return this.geo.getStaticMap(this._info.home.coordinates, this._info.last.location.coordinates);
         }
         private getLocation(coords: Coordinates): ng.IPromise<ILocation> {
             let def = this.qService.defer<ILocation>();

@@ -36,7 +36,7 @@ namespace HomerWeb {
             });
         }
         private processCurrentLocation(handleCurrentLocation?: (current: ILocation) => void): ng.IPromise<ILocation> {
-            return this.getCurrentLocation()
+            return this.readCurrentLocation()
                 .then((current) => {
                     if (handleCurrentLocation != void 0) {
                         handleCurrentLocation(current);
@@ -55,23 +55,18 @@ namespace HomerWeb {
         private getStaticMap(home: Coordinates, current: Coordinates): string {
             return this.geo.getStaticMap(home, current);
         }
-        private getCurrentLocation(): ng.IPromise<ILocation> {
-            return this.readCurrentLocation().then((current: ILocation) => {
-                return current;
-            });
-        }
         private getLocation(coords: Coordinates): ng.IPromise<ILocation> {
-            let d = this.qService.defer<ILocation>();
+            let def = this.qService.defer<ILocation>();
             GoogleGeocoding.GeoCoder.getAddress(
                 coords,
-                (address) => d.resolve({
+                (address) => def.resolve({
                     coordinates: coords,
                     dms: this.geo.coordsToDMS(coords),
                     address: address,
                     latLon: GoogleMapping.StaticMap.coordsToString(coords)
                 }),
-                (status) => d.reject(status));
-            return d.promise;
+                (status) => def.reject(status));
+            return def.promise;
         }
         private readNav(): ng.IPromise<Coordinates> {
             let def = this.qService.defer<Coordinates>();

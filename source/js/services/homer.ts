@@ -15,7 +15,7 @@ namespace HomerWeb {
     }
     export class HomerService {
         private _info: IInfo;
-        constructor(private qService: ng.IQService, private geo: GeoService, private storageSvc: StorageService) {
+        constructor(private qSvc: ng.IQService, private geoSvc: GeoService, private storageSvc: StorageService) {
             this._info = this.storageSvc.readInfo();
         }
         get home(): ILocation {
@@ -50,15 +50,15 @@ namespace HomerWeb {
             return GoogleGeocoding.GeoCoder.computeDistanceBetween(info.home.coordinates, info.last.location.coordinates);
         }
         get mapUrl(): string {
-            return this.geo.getStaticMap(this._info.home.coordinates, this._info.last.location.coordinates);
+            return this.geoSvc.getStaticMap(this._info.home.coordinates, this._info.last.location.coordinates);
         }
         private getLocation(coords: Coordinates): ng.IPromise<ILocation> {
-            let def = this.qService.defer<ILocation>();
+            let def = this.qSvc.defer<ILocation>();
             GoogleGeocoding.GeoCoder.getAddress(
                 coords,
                 (address) => def.resolve({
                     coordinates: coords,
-                    dms: this.geo.coordsToDMS(coords),
+                    dms: this.geoSvc.coordsToDMS(coords),
                     address: address,
                     latLon: GoogleMapping.StaticMap.coordsToString(coords)
                 }),
@@ -66,7 +66,7 @@ namespace HomerWeb {
             return def.promise;
         }
         private readNav(): ng.IPromise<Coordinates> {
-            let def = this.qService.defer<Coordinates>();
+            let def = this.qSvc.defer<Coordinates>();
             navigator.geolocation.getCurrentPosition(
                 (position) =>
                     // make copy of coordinates because of native flakiness

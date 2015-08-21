@@ -58,7 +58,7 @@ namespace HomerWeb {
                 coords,
                 (address) => def.resolve({
                     coordinates: coords,
-                    dms: this.geoSvc.coordsToDMS(coords),
+                    dms: this.geoSvc.coordsToDms(coords),
                     address: address,
                     latLon: GoogleMapping.StaticMap.coordsToString(coords)
                 }),

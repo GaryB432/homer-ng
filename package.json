@@ -6,7 +6,9 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "geodesy": "^1.0.2"
+  },
   "devDependencies": {
     "express": "^4.13.3",
     "gulp": "^3.9.0",

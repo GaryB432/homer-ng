@@ -16,7 +16,7 @@ gulp.task('scripts', function () {
         'bower_components/angular-route/angular-route.js',
         'bower_components/moment/moment.js',
         'bower_components/angular-moment/angular-moment.js',
-        'source/geo/geo.js'
+        'node_modules/geodesy/dms.js'
     ])
         .pipe(concat('lib.js'))
         .pipe(gulp.dest('./app/js/'));

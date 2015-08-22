@@ -43,7 +43,7 @@ namespace GoogleMapping {
             return GoogleGeocoding.GeoCoder.getLatLng(latlon).toString();
         }
         static googleMapUrl(home: Coordinates, current: Coordinates): string {
-            return 'https://maps.googleapis.com/maps/api/staticmap?size=290x345' +
+            return 'https://maps.googleapis.com/maps/api/staticmap?size=145x172&scale=2' +
                 '&markers=' + StaticMap.marker('green', 'C', current) +
                 '&markers=' + StaticMap.marker('blue', 'H', home);
         }

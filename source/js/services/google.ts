@@ -1,3 +1,20 @@
+class UrlParser {
+    make(base: string, params: any): string {
+        if (!params) return base;
+        let a: string[] = [];
+        for (let p in params) {
+            if (Array.isArray(params[p])) {
+                for (let r of params[p]) {
+                    a.push(`${encodeURIComponent(p) }=${encodeURIComponent(r.toString()) }`);
+                }
+            } else {
+                a.push(`${encodeURIComponent(p) }=${encodeURIComponent(params[p].toString()) }`);
+            }
+        }
+        return base + (base.indexOf('?') < 0 ? '?' : '&') + a.join('&');
+    }
+}
+
 namespace GoogleGeocoding {
     export class GeoCoder {
         static computeDistanceBetween(from: Coordinates, to: Coordinates, radius?: number) {
@@ -38,17 +55,25 @@ namespace GoogleMapping {
             });
         }
     }
+    interface StaticMapOptions {
+        size: string;
+        scale: string;
+        markers: string[];
+    }
     export class StaticMap {
         static coordsToString(latlon: Coordinates) {
             return GoogleGeocoding.GeoCoder.getLatLng(latlon).toString();
         }
         static googleMapUrl(home: Coordinates, current: Coordinates): string {
-            return 'https://maps.googleapis.com/maps/api/staticmap?size=145x172&scale=2' +
-                '&markers=' + StaticMap.marker('green', 'C', current) +
-                '&markers=' + StaticMap.marker('blue', 'H', home);
+            let opts: StaticMapOptions = {
+                size: '145x172',
+                scale: '2',
+                markers: [StaticMap.marker('green', 'C', current), StaticMap.marker('blue', 'H', home)]
+            };
+            return new UrlParser().make('https://maps.google.com/maps/api/staticmap', opts);
         }
         private static marker(color: string, label: string, latlon: Coordinates) {
-            return 'color:' + color + '%7C' + 'label:' + label + '%7C' + GoogleGeocoding.GeoCoder.getLatLng(latlon).toUrlValue();
+            return `color:${color}|label:${label}|${GoogleGeocoding.GeoCoder.getLatLng(latlon).toUrlValue() }`;
         }
     }
 }

@@ -25,10 +25,10 @@ namespace HomerWeb {
 			return this.svc.mapUrl;
 		}
 		setHome() {
-			this.svc.setHome().then((home) => console.log(home));
+			this.svc.setHome().catch((msg) => alert(msg));
 		}
 		setCurrent() {
-			this.svc.setCurrent().then((current) => console.log(current));
+			this.svc.setCurrent().catch((msg) => alert(msg));
 		}
 	}
 

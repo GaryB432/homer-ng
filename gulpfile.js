@@ -42,9 +42,14 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('./app/css/'));
 });
  
-// gulp.task('sass:watch', function () {
-//   gulp.watch('./sass/**/*.scss', ['sass']);
-// });
+gulp.task('sass:watch', function () {
+    gulp.watch('./source/**/*.scss', ['sass']);
+});
+
+gulp.task('jade:watch', function () {
+    gulp.watch('./source/**/*.jade', ['templates']);
+});
 
 gulp.task('default', ['scripts', 'templates', 'sass']);
+gulp.task('watch', ['sass:watch', 'jade:watch']);
 

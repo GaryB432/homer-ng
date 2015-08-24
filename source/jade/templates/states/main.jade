@@ -1,17 +1,15 @@
-.ip
-	.a1
-		h2 Current
-		homer-spot(spot="vm.last")
-		.distance {{vm.distance | distanceFilter:'miles' | number:3}}
-		button#setCurrent(ng-click="vm.setCurrent()") Set Current
-	.flip-container(ng-class="{'flip': flipped}",ng-swipe-left="flipped=!flipped")
+.content
+	h2 Current
+	homer-spot(spot="vm.last")
+	.distance {{vm.distance | distanceFilter:'miles' | number:3}}
+	button#setCurrent(ng-click="vm.setCurrent()") Set Current
+	.flip-container(ng-mousedown="$event.preventDefault()",ng-class="{'flip': flipped}",ng-swipe-left="flipped=!flipped")
 		.flipper
 			.front
 				img#map(ng-src="{{vm.mapUrl}}")
 			.back
 				p back is here
 				p for moar fun
-	.a3
-		h2 Home
-		homer-location(location="vm.home")
-		button#setHome(ng-click="vm.setHome()") Set Home
+	h2 Home
+	homer-location(location="vm.home")
+	button#setHome(ng-click="vm.setHome()") Set Home

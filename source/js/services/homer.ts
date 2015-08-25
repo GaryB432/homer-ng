@@ -79,7 +79,7 @@ namespace HomerWeb {
                         longitude: position.coords.longitude,
                         speed: position.coords.speed
                     }),
-                (e) => def.reject(e), null);
+                (e) => def.reject(e.message), null);
             return def.promise;
         }
         private readCurrentLocation(): ng.IPromise<ILocation> {

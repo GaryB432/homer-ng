@@ -25,10 +25,10 @@
         top: -110px;
     }
 
-        &.ng-leave,
-        &.ng-enter.ng-enter-active {
-            top: 0;
-        }
+    &.ng-leave,
+    &.ng-enter.ng-enter-active {
+        top: 0;
+    }
 }
 
 .coords {

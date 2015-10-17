@@ -1,3 +1,5 @@
+/// <reference path="../../typings/tsd.d.ts" />
+
 var App = angular.module('homerApp', ['ngRoute','ngTouch', 'ngAnimate', 'angularMoment' ]);
 
 App.config(function ($routeProvider: ng.route.IRouteProvider) {

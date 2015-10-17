@@ -1,5 +1,5 @@
 class UrlParser {
-    make(base: string, params: any): string {
+    make(base: string, params?: any): string {
         if (!params) return base;
         let a: string[] = [];
         for (let p in params) {
@@ -42,19 +42,6 @@ namespace GoogleGeocoding {
 }
 
 namespace GoogleMapping {
-    export class DynamicMap {
-        map: google.maps.Map;
-        constructor(mapDiv: Element, opts?: google.maps.MapOptions) {
-            this.map = new google.maps.Map(mapDiv, opts);
-        }
-        showLocation(location: Coordinates, name: string) {
-            var infowindow = new google.maps.InfoWindow({
-                map: this.map,
-                position: GoogleGeocoding.GeoCoder.getLatLng(location),
-                content: name
-            });
-        }
-    }
     interface StaticMapOptions {
         size: string;
         scale: string;

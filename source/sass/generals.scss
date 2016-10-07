@@ -1,3 +1,10 @@
+@mixin wide-guy {
+	position: relative;
+	left: 0;
+	width: 100%;
+	max-width: 1080px;
+	margin: 0 auto;
+}
 html {
 	height: 100%;
 	width: 100%;
@@ -5,19 +12,20 @@ html {
 }
 body {
 	margin: 0 auto;
+	font: 24px sans-serif;
 	background-color: silver;
 }
+footer {
+	@include wide-guy;
+	font-size: .5em;
+	background-color: white;
+}
 .container {
-	position: relative;
-	left: 0;
-	width: 100%;
-	max-width: 1080px;
-	margin: 0 auto;
+	@include wide-guy;
 }
 .content {
 	background: white;
 	padding: 5px;
-	font: 22px sans-serif;
 	position: relative;
 	h2 {
 		font-size: 1.5em;
